@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -16,12 +17,12 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-lg">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
             <span className="font-serif text-lg font-bold text-primary-foreground">60</span>
           </div>
           <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
@@ -38,12 +39,16 @@ const Header = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="ghost" size="sm">
-            Sign In
-          </Button>
-          <Button size="sm">
-            Get Started Free
-          </Button>
+          <Link to="/login">
+            <Button variant="ghost" size="sm">
+              Sign In
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button size="sm">
+              Get Started Free
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -71,12 +76,16 @@ const Header = () => {
               </a>
             ))}
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
-              <Button variant="ghost" className="justify-start">
-                Sign In
-              </Button>
-              <Button>
-                Get Started Free
-              </Button>
+              <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start">
+                  Sign In
+                </Button>
+              </Link>
+              <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                <Button className="w-full">
+                  Get Started Free
+                </Button>
+              </Link>
             </div>
           </nav>
         </div>

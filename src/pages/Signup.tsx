@@ -36,17 +36,24 @@ const Signup = () => {
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg">60</span>
-          </div>
-          <span className="font-display text-2xl font-bold text-primary">60db.ai</span>
+        <Link to="/" className="flex justify-center align-center gap-2">
+          <img
+            src="/60db-logo.png"
+            alt="60db.ai Logo"
+            className="h-[4rem] w-[7rem] mb-3"
+          />
+          {/* Optional: Keep text next to logo */}
+          {/* <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span> */}
         </Link>
 
         <Card className="border-border/50 shadow-lg">
           <CardHeader className="text-center pb-4">
-            <CardTitle className="font-display text-2xl">Create an account</CardTitle>
-            <CardDescription>Start generating studio-quality voices today</CardDescription>
+            <CardTitle className="font-display text-2xl">
+              Create an account
+            </CardTitle>
+            <CardDescription>
+              Start generating studio-quality voices today
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Google Sign Up */}
@@ -82,7 +89,9 @@ const Signup = () => {
                 <Separator className="w-full" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or continue with email</span>
+                <span className="bg-card px-2 text-muted-foreground">
+                  Or continue with email
+                </span>
               </div>
             </div>
 
@@ -129,7 +138,11 @@ const Signup = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
                 {password && (
@@ -141,7 +154,11 @@ const Signup = () => {
                           req.met ? "text-green-600" : "text-muted-foreground"
                         }`}
                       >
-                        <Check className={`w-3 h-3 ${req.met ? "opacity-100" : "opacity-30"}`} />
+                        <Check
+                          className={`w-3 h-3 ${
+                            req.met ? "opacity-100" : "opacity-30"
+                          }`}
+                        />
                         {req.label}
                       </div>
                     ))}
@@ -153,10 +170,15 @@ const Signup = () => {
                 <Checkbox
                   id="terms"
                   checked={agreedToTerms}
-                  onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    setAgreedToTerms(checked as boolean)
+                  }
                   className="mt-0.5"
                 />
-                <Label htmlFor="terms" className="text-sm font-normal leading-tight">
+                <Label
+                  htmlFor="terms"
+                  className="text-sm font-normal leading-tight"
+                >
                   I agree to the{" "}
                   <Link to="/terms" className="text-primary hover:underline">
                     Terms of Service
@@ -180,7 +202,10 @@ const Signup = () => {
 
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link to="/login" className="text-primary font-medium hover:underline">
+              <Link
+                to="/login"
+                className="text-primary font-medium hover:underline"
+              >
                 Sign in
               </Link>
             </p>

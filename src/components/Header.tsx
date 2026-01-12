@@ -18,10 +18,13 @@ const Header = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <span className="font-serif text-lg font-bold text-primary-foreground">60</span>
-          </div>
-          <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span>
+          <img
+            src="/60db-logo.png"
+            alt="60db.ai Logo"
+            className="h-[3rem] w-[6rem]"
+          />
+          {/* Optional: Keep text next to logo */}
+          {/* <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span> */}
         </Link>
 
         {/* Desktop Navigation */}
@@ -45,9 +48,7 @@ const Header = () => {
             </Button>
           </Link>
           <Link to="/signup">
-            <Button size="sm">
-              Get Started Free
-            </Button>
+            <Button size="sm">Get Started Free</Button>
           </Link>
         </div>
 
@@ -57,7 +58,11 @@ const Header = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </div>
 
@@ -82,9 +87,7 @@ const Header = () => {
                 </Button>
               </Link>
               <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full">
-                  Get Started Free
-                </Button>
+                <Button className="w-full">Get Started Free</Button>
               </Link>
             </div>
           </nav>

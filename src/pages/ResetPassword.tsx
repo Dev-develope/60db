@@ -34,11 +34,14 @@ const ResetPassword = () => {
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg">60</span>
-          </div>
-          <span className="font-display text-2xl font-bold text-primary">60db.ai</span>
+        <Link to="/" className="flex justify-center align-center gap-2">
+          <img
+            src="/60db-logo.png"
+            alt="60db.ai Logo"
+            className="h-[4rem] w-[7rem] mb-3"
+          />
+          {/* Optional: Keep text next to logo */}
+          {/* <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span> */}
         </Link>
 
         <Card className="border-border/50 shadow-lg">
@@ -48,9 +51,12 @@ const ResetPassword = () => {
                 <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
                   <KeyRound className="w-8 h-8 text-primary" />
                 </div>
-                <CardTitle className="font-display text-2xl">Set new password</CardTitle>
+                <CardTitle className="font-display text-2xl">
+                  Set new password
+                </CardTitle>
                 <CardDescription>
-                  Your new password must be different from previously used passwords.
+                  Your new password must be different from previously used
+                  passwords.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -72,7 +78,11 @@ const ResetPassword = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                       >
-                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        {showPassword ? (
+                          <EyeOff className="w-5 h-5" />
+                        ) : (
+                          <Eye className="w-5 h-5" />
+                        )}
                       </button>
                     </div>
                   </div>
@@ -91,7 +101,9 @@ const ResetPassword = () => {
                       />
                       <button
                         type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                       >
                         {showConfirmPassword ? (
@@ -113,7 +125,9 @@ const ResetPassword = () => {
                           }`}
                         >
                           <Check
-                            className={`w-4 h-4 ${req.met ? "opacity-100" : "opacity-30"}`}
+                            className={`w-4 h-4 ${
+                              req.met ? "opacity-100" : "opacity-30"
+                            }`}
                           />
                           {req.label}
                         </div>
@@ -138,10 +152,12 @@ const ResetPassword = () => {
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="w-8 h-8 text-green-600" />
                 </div>
-                <CardTitle className="font-display text-2xl">Password reset successful</CardTitle>
+                <CardTitle className="font-display text-2xl">
+                  Password reset successful
+                </CardTitle>
                 <CardDescription>
-                  Your password has been successfully reset. You can now sign in with your new
-                  password.
+                  Your password has been successfully reset. You can now sign in
+                  with your new password.
                 </CardDescription>
               </CardHeader>
               <CardContent>

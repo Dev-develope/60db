@@ -27,17 +27,24 @@ const Login = () => {
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg">60</span>
-          </div>
-          <span className="font-display text-2xl font-bold text-primary">60db.ai</span>
+        <Link to="/" className="flex justify-center align-center gap-2 mb-3">
+          <img
+            src="/60db-logo.png"
+            alt="60db.ai Logo"
+            className="h-[4rem] w-[7rem] mb-1"
+          />
+          {/* Optional: Keep text next to logo */}
+          {/* <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span> */}
         </Link>
 
         <Card className="border-border/50 shadow-lg">
           <CardHeader className="text-center pb-4">
-            <CardTitle className="font-display text-2xl">Welcome back</CardTitle>
-            <CardDescription>Sign in to your account to continue</CardDescription>
+            <CardTitle className="font-display text-2xl">
+              Welcome back
+            </CardTitle>
+            <CardDescription>
+              Sign in to your account to continue
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Google Sign In */}
@@ -73,7 +80,9 @@ const Login = () => {
                 <Separator className="w-full" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or continue with email</span>
+                <span className="bg-card px-2 text-muted-foreground">
+                  Or continue with email
+                </span>
               </div>
             </div>
 
@@ -116,18 +125,29 @@ const Login = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
               </div>
-              <Button type="submit" className="w-full h-12 text-base" variant="hero">
+              <Button
+                type="submit"
+                className="w-full h-12 text-base"
+                variant="hero"
+              >
                 Sign In
               </Button>
             </form>
 
             <p className="text-center text-sm text-muted-foreground">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-primary font-medium hover:underline">
+              <Link
+                to="/signup"
+                className="text-primary font-medium hover:underline"
+              >
                 Sign up
               </Link>
             </p>

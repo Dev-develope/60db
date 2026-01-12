@@ -211,9 +211,7 @@ const Header = () => {
             </Button>
           </Link>
           <Link to="/signup">
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Sign up
-            </Button>
+            <Button size="sm">Get Started Free</Button>
           </Link>
         </div>
 
@@ -291,9 +289,7 @@ const Header = () => {
                 </Button>
               </Link>
               <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full">
-                  Sign up
-                </Button>
+                <Button className="w-full">Get Started Free</Button>
               </Link>
             </div>
           </nav>

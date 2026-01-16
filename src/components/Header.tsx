@@ -18,7 +18,7 @@ const Header = () => {
 
   const menuData = {
     products: {
-      label: "Products",
+      label: "Product",
       columns: [
         {
           title: "Platform",

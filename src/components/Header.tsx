@@ -23,7 +23,7 @@ const Header = () => {
         {
           title: "Platform",
           items: [
-            { name: "Product Overview", desc: "Discover 60db.ai Voice Platform" },
+            { name: "Products Overview", desc: "Discover 60db.ai Voice Platform" },
             { name: "Studio", desc: "Generate long-form audio" },
             { name: "Voice Library", desc: "Voices for any character" },
             { name: "Productions", desc: "Human-edited content" },

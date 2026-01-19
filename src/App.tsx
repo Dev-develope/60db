@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import ProductPage from "./pages/ProductsPage/ProductPage";
 import StudioPage from "./pages/StudioPage/StudioPage";
 import VoiceLibraryPage from "./pages/VoiceLibraryPage/VoiceLibraryPage";
+import ProductionPage from "./pages/ProductionPage/ProductionPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,11 +32,10 @@ const App = () => (
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          {/* <Route path="/showcase" element={<Showcase />} />
-          <Route path="/availability" element={<Availability />} /> */}
           <Route path="/products" element={<ProductPage />} />
           <Route path="/studio" element={<StudioPage />} />
           <Route path="/voice-library" element={<VoiceLibraryPage />} />
+          <Route path="/production" element={<ProductionPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -16,6 +16,7 @@ import VoiceLibraryPage from "./pages/VoiceLibraryPage/VoiceLibraryPage";
 import ProductionPage from "./pages/ProductionPage/ProductionPage";
 import MobilePage from "./pages/MobilePage/MobilePage";
 import TextToSpeechPage from "./pages/TextToSpeechPage/TextToSpeechPage";
+import SpeechToTextPage from "./pages/SpeechToTextPage/SpeechToTextPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/production" element={<ProductionPage />} />
           <Route path="/mobile" element={<MobilePage />} />
           <Route path="/text-to-speech" element={<TextToSpeechPage />} />
+          <Route path="/speech-to-text" element={<SpeechToTextPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

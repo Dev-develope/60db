@@ -20,6 +20,7 @@ import SpeechToTextPage from "./pages/SpeechToTextPage/SpeechToTextPage";
 import VoiceIsolatorPage from "./pages/VoiceIsolatorPage/VoiceIsolatorPage";
 import SoundEffectsPage from "./pages/SoundEffectsPage/SoundEffectsPage";
 import MusicPage from "./pages/MusicPage/MusicPage";
+import ImageVideoPage from "./pages/ImageVideoPage/ImageVideoPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/voice-isolator" element={<VoiceIsolatorPage />} />
           <Route path="/sound-effects" element={<SoundEffectsPage />} />
           <Route path="/music" element={<MusicPage />} />
+          <Route path="/image-video" element={<ImageVideoPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

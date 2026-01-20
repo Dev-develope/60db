@@ -44,7 +44,7 @@ const Header = () => {
         {
           title: "Advanced",
           items: [
-            { name: "Voice Design", desc: "Generate a custom voice", path: "#" },
+            { name: "Voice Design", desc: "Generate a custom voice", path: "/voice-design" },
             { name: "Realtime Speech", desc: "Live speech transcription", path: "#" },
             { name: "Voice Changer", desc: "Deliver audio in any voice", path: "#" },
             { name: "Voice Cloning", desc: "Create a replica of your voice", path: "#" },

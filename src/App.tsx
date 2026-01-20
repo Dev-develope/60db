@@ -23,6 +23,7 @@ import MusicPage from "./pages/MusicPage/MusicPage";
 import ImageVideoPage from "./pages/ImageVideoPage/ImageVideoPage";
 import VoiceDesignPage from "./pages/VoiceDesignPage/VoiceDesignPage";
 import NotFound from "./pages/NotFound";
+import RealtimeSpeechToTextPage from "./pages/RealtimeSpeechToTextPage/RealtimeSpeechToTextPage";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,8 @@ const App = () => (
           <Route path="/music" element={<MusicPage />} />
           <Route path="/image-video" element={<ImageVideoPage />} />
           <Route path="/voice-design" element={<VoiceDesignPage />} />
+          <Route path="/voice-design" element={<VoiceDesignPage />} />
+          <Route path="/realtime-speech-to-text" element={<RealtimeSpeechToTextPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -90,7 +90,7 @@ const VoiceDesignHero = () => {
 
                     {/* Left Column: Headings & CTA */}
                     <div className="space-y-6 max-w-2xl lg:pb-12">
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] animate-in slide-in-from-bottom-5 fade-in duration-700">
+                        <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] animate-in slide-in-from-bottom-5 fade-in duration-700">
                             Generate any AI voice you can imagine using just a text prompt
                         </h1>
                         <p className="text-lg md:text-xl text-neutral-300 font-medium max-w-xl animate-in slide-in-from-bottom-6 fade-in duration-700 delay-100">

@@ -37,7 +37,7 @@ const Header = () => {
             { name: "Speech to Text", desc: "Transcribe audio and video", path: "/speech-to-text" },
             { name: "Voice Isolator", desc: "Extract crystal-clear speech", path: "/voice-isolator" },
             { name: "Sound Effects", desc: "Generate any sound", path: "/sound-effects" },
-            { name: "Music", desc: "Convert an idea into a song", path: "#" },
+            { name: "Music", desc: "Convert an idea into a song", path: "/music" },
           ],
         },
         {
@@ -105,7 +105,7 @@ const Header = () => {
             { name: "Text to Speech", desc: "Generate speech via API", path: "/text-to-speech" },
             { name: "Speech to Text", desc: "Transcribe in bulk", path: "/speech-to-text" },
             { name: "Dubbing API", desc: "Translate audio via API", path: "#" },
-            { name: "Music API", desc: "Compose songs via API", path: "#" },
+            { name: "Music API", desc: "Compose songs via API", path: "/music" },
           ],
         },
       ],

@@ -18,36 +18,37 @@ const Header = () => {
 
   const menuData = {
     products: {
-      label: "Products",
+      label: "Product",
       columns: [
         {
           title: "Platform",
           items: [
-            { name: "Products Overview", desc: "Discover 60db.ai Voice Platform" },
-            { name: "Studio", desc: "Generate long-form audio" },
-            { name: "Voice Library", desc: "Voices for any character" },
-            { name: "Productions", desc: "Human-edited content" },
-            { name: "Mobile App", desc: "Lifelike voiceovers on the go" },
+            { name: "Image & Video", desc: "Discover our visual tools", path: "/image-video" },
+            { name: "Products Overview", desc: "Discover 60db.ai Voice Platform", path: "/products" },
+            { name: "Studio", desc: "Generate long-form audio", path: "/studio" },
+            { name: "Voice Library", desc: "Voices for any character", path: "/voice-library" },
+            { name: "Productions", desc: "Human-edited content", path: "/production" },
+            { name: "Mobile App", desc: "Lifelike voiceovers on the go", path: "/mobile" },
           ],
         },
         {
           title: "Create",
           items: [
-            { name: "Text to Speech", desc: "Generate human-like AI Voice" },
-            { name: "Speech to Text", desc: "Transcribe audio and video" },
-            { name: "Voice Isolator", desc: "Extract crystal-clear speech" },
-            { name: "Sound Effects", desc: "Generate any sound" },
-            { name: "Music", desc: "Convert an idea into a song" },
+            { name: "Text to Speech", desc: "Generate human-like AI Voice", path: "/text-to-speech" },
+            { name: "Speech to Text", desc: "Transcribe audio and video", path: "/speech-to-text" },
+            { name: "Voice Isolator", desc: "Extract crystal-clear speech", path: "/voice-isolator" },
+            { name: "Sound Effects", desc: "Generate any sound", path: "/sound-effects" },
+            { name: "Music", desc: "Convert an idea into a song", path: "/music" },
           ],
         },
         {
           title: "Advanced",
           items: [
-            { name: "Voice Design", desc: "Generate a custom voice" },
-            { name: "Realtime Speech", desc: "Live speech transcription" },
-            { name: "Voice Changer", desc: "Deliver audio in any voice" },
-            { name: "Voice Cloning", desc: "Create a replica of your voice" },
-            { name: "Dubbing", desc: "Localize audio content" },
+            { name: "Voice Design", desc: "Generate a custom voice", path: "#" },
+            { name: "Realtime Speech", desc: "Live speech transcription", path: "#" },
+            { name: "Voice Changer", desc: "Deliver audio in any voice", path: "#" },
+            { name: "Voice Cloning", desc: "Create a replica of your voice", path: "#" },
+            { name: "Dubbing", desc: "Localize audio content", path: "#" },
           ],
         },
       ],
@@ -91,21 +92,21 @@ const Header = () => {
         {
           title: "Platform",
           items: [
-            { name: "Overview", desc: "Get started with our APIs" },
-            { name: "Documentation", desc: "Comprehensive guides" },
-            { name: "API Reference", desc: "Complete API specs" },
-            { name: "Enterprise", desc: "Custom solutions" },
-            { name: "Community", desc: "Join the discussion" },
+            { name: "Overview", desc: "Get started with our APIs", path: "#" },
+            { name: "Documentation", desc: "Comprehensive guides", path: "#" },
+            { name: "API Reference", desc: "Complete API specs", path: "#" },
+            { name: "Enterprise", desc: "Custom solutions", path: "#" },
+            { name: "Community", desc: "Join the discussion", path: "#" },
           ],
         },
         {
           title: "APIs",
           items: [
-            { name: "Agents API", desc: "Deploy Voice Agents" },
-            { name: "Text to Speech", desc: "Generate speech via API" },
-            { name: "Speech to Text", desc: "Transcribe in bulk" },
-            { name: "Dubbing API", desc: "Translate audio via API" },
-            { name: "Music API", desc: "Compose songs via API" },
+            { name: "Agents API", desc: "Deploy Voice Agents", path: "#" },
+            { name: "Text to Speech", desc: "Generate speech via API", path: "/text-to-speech" },
+            { name: "Speech to Text", desc: "Transcribe in bulk", path: "/speech-to-text" },
+            { name: "Dubbing API", desc: "Translate audio via API", path: "#" },
+            { name: "Music API", desc: "Compose songs via API", path: "/music" },
           ],
         },
       ],
@@ -141,10 +142,13 @@ const Header = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <span className="font-serif text-lg font-bold text-primary-foreground">60</span>
-          </div>
-          <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span>
+          <img
+            src="/60db-logo.png"
+            alt="60db.ai Logo"
+            className="h-[3rem] w-[6rem]"
+          />
+          {/* Optional: Keep text next to logo */}
+          {/* <span className="font-serif text-xl font-semibold text-foreground">60db.ai</span> */}
         </Link>
 
         {/* Desktop Navigation */}
@@ -166,8 +170,8 @@ const Header = () => {
                           {column.items.map((item, itemIdx) => (
                             <li key={itemIdx}>
                               <NavigationMenuLink asChild>
-                                <a
-                                  href="#"
+                                <Link
+                                  to={item.path || "#"}
                                   className="block rounded-md p-2 hover:bg-accent transition-colors group"
                                 >
                                   <span className="block text-sm font-medium text-foreground group-hover:text-primary transition-colors">
@@ -176,7 +180,7 @@ const Header = () => {
                                   <span className="block text-xs text-muted mt-0.5">
                                     {item.desc}
                                   </span>
-                                </a>
+                                </Link>
                               </NavigationMenuLink>
                             </li>
                           ))}
@@ -187,15 +191,15 @@ const Header = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
             ))}
-            
+
             {/* Simple links */}
             <NavigationMenuItem>
-              <a
-                href="#pricing"
+              <Link
+                to="/pricing"
                 className="inline-flex h-10 items-center justify-center px-4 py-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
               >
                 Pricing
-              </a>
+              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
@@ -208,9 +212,7 @@ const Header = () => {
             </Button>
           </Link>
           <Link to="/signup">
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Sign up
-            </Button>
+            <Button size="sm">Get Started Free</Button>
           </Link>
         </div>
 
@@ -220,7 +222,11 @@ const Header = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </div>
 
@@ -252,13 +258,13 @@ const Header = () => {
                         <ul className="space-y-1">
                           {column.items.map((item, itemIdx) => (
                             <li key={itemIdx}>
-                              <a
-                                href="#"
+                              <Link
+                                to={item.path || "#"}
                                 className="block py-2 pl-2 text-sm text-muted hover:text-foreground transition-colors"
                                 onClick={() => setIsMenuOpen(false)}
                               >
                                 {item.name}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -268,15 +274,15 @@ const Header = () => {
                 )}
               </div>
             ))}
-            
-            <a
-              href="#pricing"
+
+            <Link
+              to="/pricing"
               className="py-3 text-sm font-medium text-foreground border-b border-border/50"
               onClick={() => setIsMenuOpen(false)}
             >
               Pricing
-            </a>
-            
+            </Link>
+
             <div className="flex flex-col gap-2 pt-4">
               <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="ghost" className="w-full justify-center">
@@ -284,9 +290,7 @@ const Header = () => {
                 </Button>
               </Link>
               <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full">
-                  Sign up
-                </Button>
+                <Button className="w-full">Get Started Free</Button>
               </Link>
             </div>
           </nav>

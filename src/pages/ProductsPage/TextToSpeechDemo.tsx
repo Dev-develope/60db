@@ -1,0 +1,332 @@
+
+import { useState } from "react";
+import { Play, Mic, SkipBack, SkipForward } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Mousewheel, Autoplay } from "swiper/modules";
+import "swiper/css/mousewheel";
+import "swiper/css";
+import "swiper/css/free-mode"; // Required for slidesPerView: "auto"
+import "swiper/css/autoplay";
+
+const TextToSpeechDemo = () => {
+    const [activeTab, setActiveTab] = useState("Text to Speech");
+    const [viewMode, setViewMode] = useState<"demo" | "code">("demo");
+
+    const tabs = ["Text to Speech", "Transcription", "Music", "Sound Effects"];
+    const logos = [
+        "Lovable", "Synthesia", "Stripe", "perplexity", "twilio"
+    ];
+
+    const codeSnippets = {
+        "Text to Speech": `import { ElevenLabsClient } from "elevenlabs";
+
+const client = new ElevenLabsClient();
+
+const audio = await client.generate({
+  voice: "Jessica",
+  text: "In the ancient land of Eldoria...",
+  model_id: "eleven_multilingual_v2"
+});
+
+await play(audio);`,
+        "Transcription": `import { ElevenLabsClient } from "elevenlabs";
+
+const client = new ElevenLabsClient();
+
+const transcription = await client.transcribe({
+  file: audioFile,
+  model_id: "scribe_v1"
+});
+
+console.log(transcription.text);`,
+        "Music": `import { ElevenLabsClient } from "elevenlabs";
+
+const client = new ElevenLabsClient();
+
+const audio = await client.textToMusic.convert({
+  text: "Cinematic scores, Orchestral, Epic",
+  duration_seconds: 10
+});
+
+await play(audio);`,
+        "Sound Effects": `import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
+
+const elevenlabs = new ElevenLabsClient();
+
+const audio = await elevenlabs.textToSoundEffects.convert({
+  text: "Cinematic Braam, Horror",
+});`
+    };
+
+    const renderCode = () => {
+        const code = codeSnippets[activeTab as keyof typeof codeSnippets];
+        return (
+            <div className="bg-white rounded-2xl p-4 md:p-8 shadow-sm mb-10 overflow-hidden font-mono text-sm relative min-h-[300px] flex items-center">
+                <div className="absolute top-4 right-4 flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-400/20"></div>
+                    <div className="w-3 h-3 rounded-full bg-amber-400/20"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-400/20"></div>
+                </div>
+                <pre className="text-gray-700 whitespace-pre-wrap">
+                    {activeTab === "Sound Effects" ? (
+                        <>
+                            <span className="text-purple-600">import</span> {"{ ElevenLabsClient }"} <span className="text-purple-600">from</span> <span className="text-green-600">"@elevenlabs/elevenlabs-js"</span>;
+                            {"\n\n"}
+                            <span className="text-blue-600">const</span> elevenlabs = <span className="text-blue-600">new</span> <span className="text-yellow-600">ElevenLabsClient</span>();
+                            {"\n\n"}
+                            <span className="text-blue-600">const</span> audio = <span className="text-purple-600">await</span> elevenlabs.textToSoundEffects.<span className="text-yellow-600">convert</span>({"{"}
+                            {"\n"}  text: <span className="text-green-600">"Cinematic Braam, Horror"</span>,
+                            {"\n"});
+                        </>
+                    ) : (
+                        // Generic highlighting for others for now
+                        code
+                    )}
+                </pre>
+            </div>
+        );
+    };
+
+    const renderContent = () => {
+        if (viewMode === "code") {
+            return renderCode();
+        }
+
+        switch (activeTab) {
+            case "Text to Speech":
+                return (
+                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm mb-10 relative">
+                        <p className="text-lg leading-relaxed text-foreground/80 mb-8 font-light">
+                            In the ancient land of Eldoria, where skies shimmered and forests,
+                            whispered secrets to the wind, lived a dragon named Zephyros.
+                            <span className="text-muted-foreground/60"> [sarcastically] </span>
+                            Not the "burn it all down" kind...
+                            <span className="text-muted-foreground/60"> [giggles] </span>
+                            but he was gentle, wise, with eyes like old stars.
+                            <span className="text-muted-foreground/60"> [whispers] </span>
+                            Even the birds fell silent when he passed.
+                        </p>
+
+                        <div className="flex flex-wrap items-center justify-between gap-4">
+                            <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
+                                    <span className="w-4 h-4 rounded-full bg-blue-500 overflow-hidden flex items-center justify-center text-[10px] text-white">US</span>
+                                    <span className="text-sm font-medium">English</span>
+                                </div>
+                                <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
+                                    <span className="w-4 h-4 rounded-full bg-pink-400"></span>
+                                    <span className="text-sm font-medium">Jessica</span>
+                                </div>
+                            </div>
+
+                            <button className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition-colors">
+                                <Play className="w-5 h-5 fill-current ml-1" />
+                            </button>
+                        </div>
+                    </div>
+                );
+            case "Transcription":
+                return (
+                    <div className="bg-white rounded-2xl p-10 md:p-20 shadow-sm mb-10 flex flex-col items-center justify-center text-center">
+                        <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mb-6 shadow-lg cursor-pointer hover:scale-105 transition-transform">
+                            <Mic className="w-8 h-8 text-white" />
+                        </div>
+                        <h3 className="text-lg font-medium text-foreground mb-1">Click to start transcribing</h3>
+                        <p className="text-muted-foreground text-sm">Experience the power of Scribe v2 Realtime</p>
+                    </div>
+                );
+            case "Music":
+                return (
+                    <div className="bg-white rounded-2xl p-6 md:p-12 shadow-sm mb-10 flex flex-col items-center justify-center">
+                        <div className="relative w-64 h-64 bg-gradient-to-br from-red-700 to-red-900 rounded-2xl shadow-xl p-8 text-white flex flex-col justify-between overflow-hidden mb-8">
+                            {/* Sphere Effect */}
+                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-gradient-to-br from-red-400/50 to-transparent blur-sm"></div>
+                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-white/20 to-transparent blur-md"></div>
+
+                            <div className="relative z-10">
+                                <h3 className="text-lg font-semibold">Cinematic scores</h3>
+                            </div>
+
+                            <div className="relative z-10 text-xs font-medium space-y-0.5 opacity-90">
+                                <p>Orchestral</p>
+                                <p>Epic</p>
+                                <p>Triumphant</p>
+                                <p>Fantasy</p>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-8">
+                            <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                                <SkipBack className="w-5 h-5" />
+                            </button>
+                            <button className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-200 transition-colors">
+                                <Play className="w-5 h-5 fill-current ml-1" />
+                            </button>
+                            <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                                <SkipForward className="w-5 h-5" />
+                            </button>
+                        </div>
+                    </div>
+                );
+            case "Sound Effects":
+                // Using Swiper for scrolling
+                return (
+                    <div className="bg-white rounded-2xl p-6 md:p-12 shadow-sm mb-10 overflow-hidden">
+                        <Swiper
+                            spaceBetween={24}
+                            slidesPerView="auto"
+                            freeMode={true}
+                            loop={true}
+                            mousewheel={true}
+                            modules={[FreeMode, Mousewheel, Autoplay]}
+                            className="w-full !overflow-visible"
+                            autoplay={{
+                                delay: 1000,
+                                disableOnInteraction: false,
+                            }}
+                        >
+                            <SwiperSlide className="!w-auto">
+                                <div className="flex flex-col items-center gap-3">
+                                    <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-500">Spaceship</span>
+                                </div>
+                            </SwiperSlide>
+
+                            <SwiperSlide className="!w-auto">
+                                <div className="flex flex-col items-center gap-3">
+                                    <div className="w-48 h-48 rounded-lg overflow-hidden relative group cursor-pointer">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-orange-500 opacity-80"></div>
+                                        {/* Lion/Roar Placeholder - simulating the image */}
+                                        <img
+                                            src="https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGlvbiUyMHJvYXJ8ZW58MHx8MHx8fDA%3D"
+                                            alt="Roar"
+                                            className="absolute inset-0 w-full h-full object-cover mix-blend-overlay"
+                                        />
+
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                <Play className="w-5 h-5 text-white fill-white" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-500">Roar</span>
+                                </div>
+                            </SwiperSlide>
+
+                            <SwiperSlide className="!w-auto">
+                                <div className="flex flex-col items-center gap-3">
+                                    <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-500">Rain</span>
+                                </div>
+                            </SwiperSlide>
+
+                            <SwiperSlide className="!w-auto">
+                                <div className="flex flex-col items-center gap-3">
+                                    <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-500">Wind</span>
+                                </div>
+                            </SwiperSlide>
+
+                            <SwiperSlide className="!w-auto">
+                                <div className="flex flex-col items-center gap-3">
+                                    <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-500">Laser</span>
+                                </div>
+                            </SwiperSlide>
+                        </Swiper>
+                    </div>
+                );
+            default:
+                return null;
+        }
+    };
+
+    const getHeaderContent = () => {
+        switch (activeTab) {
+            case "Text to Speech":
+                return { title: "Text to Speech", desc: "Convert text to speech using AI voices" };
+            case "Transcription":
+                return { title: "Transcription", desc: "Convert speech to text live or in bulk" };
+            case "Music":
+                return { title: "Music", desc: "Create music from a single prompt" };
+            case "Sound Effects":
+                return { title: "Sound Effects", desc: "Create professional-grade sound effects from a single prompt" };
+            default:
+                return { title: "Text to Speech", desc: "Convert text to speech using AI voices" };
+        }
+    };
+
+    const { title, desc } = getHeaderContent();
+
+    return (
+        <section className="py-20 bg-background font-sans">
+            <div className="container mx-auto px-4 lg:px-8">
+                <div className="max-w-5xl mx-auto">
+                    {/* Main Card */}
+                    <div className="bg-[#F5F5F3] rounded-3xl p-6 md:p-12 mb-20 min-h-[500px]">
+                        {/* Header */}
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+                            <div>
+                                <h2 className="text-2xl font-medium text-foreground mb-2">{title}</h2>
+                                <p className="text-muted-foreground">{desc}</p>
+                            </div>
+                            <div className="bg-white rounded-full p-1 flex items-center shadow-sm">
+                                <button
+                                    onClick={() => setViewMode("demo")}
+                                    className={`px-6 py-2 rounded-full font-medium text-sm transition-all duration-200 ${viewMode === "demo"
+                                        ? "bg-white shadow-sm text-foreground"
+                                        : "text-muted-foreground hover:text-foreground"
+                                        }`}
+                                >
+                                    Demo
+                                </button>
+                                <button
+                                    onClick={() => setViewMode("code")}
+                                    className={`px-6 py-2 rounded-full font-medium text-sm transition-all duration-200 ${viewMode === "code"
+                                        ? "bg-white shadow-sm text-foreground"
+                                        : "text-muted-foreground hover:text-foreground"
+                                        }`}
+                                >
+                                    Code
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Interactive Area */}
+                        {renderContent()}
+
+                        {/* Tabs */}
+                        <div className="flex flex-wrap justify-center gap-2">
+                            {tabs.map((tab) => (
+                                <button
+                                    key={tab}
+                                    onClick={() => setActiveTab(tab)}
+                                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${activeTab === tab
+                                        ? "bg-white shadow-sm text-foreground"
+                                        : "text-muted-foreground hover:text-foreground"
+                                        }`}
+                                >
+                                    {tab}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Logos */}
+                    <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-40 grayscale">
+                        {/* SVG Placeholders - using text for now as specific SVGs aren't available */}
+                        {logos.map((logo) => (
+                            <span key={logo} className="text-xl font-bold font-serif">{logo}</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default TextToSpeechDemo;

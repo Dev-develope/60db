@@ -7,22 +7,28 @@
 @layer base {
   :root {
     /* 60db.ai Brand Palette */
-    --background: 30 33% 95%; /* Cream #F3E8DF */
-    --foreground: 358 33% 22%; /* Deep Espresso #452829 */
+    --background: 30 33% 95%;
+    /* Cream #F3E8DF */
+    --foreground: 358 33% 22%;
+    /* Deep Espresso #452829 */
 
-    --card: 24 30% 90%; /* Muted Tan #E8D1C5 */
+    --card: 24 30% 90%;
+    /* Muted Tan #E8D1C5 */
     --card-foreground: 358 33% 22%;
 
     --popover: 30 33% 95%;
     --popover-foreground: 358 33% 22%;
 
-    --primary: 358 33% 22%; /* Deep Espresso #452829 */
+    --primary: 358 33% 22%;
+    /* Deep Espresso #452829 */
     --primary-foreground: 30 33% 95%;
 
-    --secondary: 24 30% 90%; /* Muted Tan #E8D1C5 */
+    --secondary: 24 30% 90%;
+    /* Muted Tan #E8D1C5 */
     --secondary-foreground: 358 33% 22%;
 
-    --muted: 210 4% 35%; /* Slate Grey #57595B */
+    --muted: 210 4% 35%;
+    /* Slate Grey #57595B */
     --muted-foreground: 30 20% 80%;
 
     --accent: 24 30% 85%;
@@ -42,12 +48,12 @@
     --slate: 210 4% 35%;
     --tan: 24 30% 90%;
     --cream: 30 33% 95%;
-    
+
     /* Gradients */
     --gradient-warm: linear-gradient(135deg, hsl(24 30% 90%) 0%, hsl(30 33% 95%) 100%);
     --gradient-espresso: linear-gradient(180deg, hsl(358 33% 22%) 0%, hsl(358 33% 28%) 100%);
     --gradient-hero: linear-gradient(180deg, hsl(30 33% 95%) 0%, hsl(24 30% 90%) 100%);
-    
+
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(358 33% 22% / 0.08);
     --shadow-card: 0 8px 32px -8px hsl(358 33% 22% / 0.12);
@@ -99,7 +105,12 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Playfair Display', Georgia, serif;
   }
 }
@@ -136,10 +147,18 @@
 }
 
 @layer utilities {
+
   /* Waveform animation */
   @keyframes wave {
-    0%, 100% { transform: scaleY(0.5); }
-    50% { transform: scaleY(1); }
+
+    0%,
+    100% {
+      transform: scaleY(0.5);
+    }
+
+    50% {
+      transform: scaleY(1);
+    }
   }
 
   .animate-wave {
@@ -148,8 +167,13 @@
 
   /* Marquee animation */
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .animate-marquee {
@@ -158,13 +182,14 @@
 
   /* Fade in animation */
   @keyframes fade-in-up {
-    0% { 
-      opacity: 0; 
-      transform: translateY(20px); 
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
     }
-    100% { 
-      opacity: 1; 
-      transform: translateY(0); 
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -174,15 +199,31 @@
 
   /* Pulse glow */
   @keyframes pulse-glow {
-    0%, 100% { 
+
+    0%,
+    100% {
       box-shadow: 0 0 20px hsl(358 33% 22% / 0.2);
     }
-    50% { 
+
+    50% {
       box-shadow: 0 0 40px hsl(358 33% 22% / 0.35);
     }
   }
 
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }

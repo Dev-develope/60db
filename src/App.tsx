@@ -35,6 +35,7 @@ import TelecommunicationsPage from "./pages/TelecommunicationsPage/Telecommunica
 import FinancialServicesPage from "./pages/FinancialServicesPage/FinancialServicesPage";
 import HealthcarePage from "./pages/HealthcarePage/HealthcarePage";
 import TechnologyPage from "./pages/TechnologyPage/TechnologyPage";
+import RetailPage from "./pages/RetailPage/RetailPage";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ const App = () => (
           <Route path="/agents/financial-services" element={<FinancialServicesPage />} />
           <Route path="/agents/healthcare" element={<HealthcarePage />} />
           <Route path="/agents/technology" element={<TechnologyPage />} />
+          <Route path="/agents/retail-ecommerce" element={<RetailPage />} />
           <Route path="/blog/category/agents-platform-stories" element={<BlogCategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

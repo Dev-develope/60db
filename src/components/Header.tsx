@@ -72,7 +72,7 @@ const Header = () => {
             { name: "Financial Services", desc: "Deliver secure service", path: "/agents/financial-services" },
             { name: "Healthcare", desc: "Streamline patient operations", path: "/agents/healthcare" },
             { name: "Technology", desc: "Drive growth with AI", path: "/agents/technology" },
-            { name: "Retail", desc: "Increase sales and loyalty", path: "/agents/retail" },
+            { name: "Retail", desc: "Increase sales and loyalty", path: "/agents/retail-ecommerce" },
           ],
         },
         {

@@ -78,10 +78,10 @@ const Header = () => {
         {
           title: "Use Cases",
           items: [
-            { name: "Customer Support", desc: "Resolve inquiries with AI" },
-            { name: "Lead Qualification", desc: "Turn leads into revenue" },
-            { name: "AI Receptionist", desc: "Streamline operations" },
-            { name: "Outbound", desc: "Scale outreach efficiently" },
+            { name: "Customer Support", desc: "Resolve inquiries with AI",path: "/agents/customer-support" },
+            { name: "Lead Qualification", desc: "Turn leads into revenue",path: "/agents/lead-qualification" },
+            { name: "AI Receptionist", desc: "Streamline operations",path: "/agents/ai-receptionist" },
+            { name: "Outbound", desc: "Scale outreach efficiently",path: "/agents/outbound" },
           ],
         },
       ],

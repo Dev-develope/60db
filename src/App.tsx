@@ -27,6 +27,9 @@ import RealtimeSpeechToTextPage from "./pages/RealtimeSpeechToTextPage/RealtimeS
 import VoiceChangerPage from "./pages/VoiceChanger/VoiceChangerPage";
 import VoiceCloningPage from "./pages/VoiceCloning/VoiceCloningPage";
 import DubbingStudioPage from "./pages/DubbingStudio/DubbingStudioPage";
+import AgentPage from "./pages/AgentsPage/AgentPage";
+import IntegrationsPage from "./pages/AgentsPage/IntegrationsPage";
+import TelecommunicationsPage from "./pages/AgentsPage/TelecommunicationsPage";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +65,9 @@ const App = () => (
           <Route path="/voice-changer" element={<VoiceChangerPage />} />
           <Route path="/voice-cloning" element={<VoiceCloningPage />} />
           <Route path="/dubbing-studio" element={<DubbingStudioPage />} />
+          <Route path="/agents" element={<AgentPage />} />
+          <Route path="/agents/integrations" element={<IntegrationsPage />} />
+          <Route path="/agents/telecom" element={<TelecommunicationsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

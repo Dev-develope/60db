@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Mic, Volume2, Globe, Zap, Users, Code, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import CreatorsSection from "@/components/CreatorsSection";
 
 const Index = () => {
   const logos = [
@@ -296,7 +297,7 @@ const Index = () => {
 
               <div className="mt-12 bg-primary-foreground/5 rounded-2xl p-8 border border-primary-foreground/10">
                 <pre className="text-sm overflow-x-auto text-primary-foreground/80">
-{`import { ElevenLabs } from "60db-ai";
+                  {`import { ElevenLabs } from "60db-ai";
 
 const client = new ElevenLabs({ apiKey: "your-api-key" });
 
@@ -332,7 +333,12 @@ const audio = await client.textToSpeech.convert({
           </div>
         </section>
 
+
+        {/* Creators Section */}
+        <CreatorsSection />
+
         {/* Use Cases Section */}
+
         <section className="py-20 lg:py-32">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

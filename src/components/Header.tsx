@@ -59,8 +59,8 @@ const Header = () => {
         {
           title: "General",
           items: [
-            { name: "Product Overview", desc: "Discover 60db.ai Agents" },
-            { name: "Integrations", desc: "Connect agents to tools" },
+            { name: "Product Overview", desc: "Discover 60db.ai Agents", path: "/agents" },
+            { name: "Integrations", desc: "Connect agents to tools", path: "/agents/integrations" },
             { name: "Customer Stories", desc: "Learn from success stories" },
             { name: "Trust & Reliability", desc: "Deploy safe AI agents" },
           ],
@@ -68,7 +68,7 @@ const Header = () => {
         {
           title: "Industries",
           items: [
-            { name: "Telecommunications", desc: "Smarter conversations at scale" },
+            { name: "Telecommunications", desc: "Smarter conversations at scale", path: "/agents/telecom" },
             { name: "Financial Services", desc: "Deliver secure service" },
             { name: "Healthcare", desc: "Streamline patient operations" },
             { name: "Technology", desc: "Drive growth with AI" },
@@ -289,7 +289,7 @@ const Header = () => {
                   Log in
                 </Button>
               </Link>
-              <Link to = "/signup" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full">Get Started Free</Button>
               </Link>
             </div>

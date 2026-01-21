@@ -6,7 +6,7 @@ import CustomerSupportHumanInteraction from "./CustomerSupportHumanInteraction";
 import CustomerSupportConcurrency from "./CustomerSupportConcurrency";
 import CustomerSupportLatency from "./CustomerSupportLatency";
 import CustomerSupportScale from "./CustomerSupportScale";
-import RetailCTA from "../RetailPage/RetailCTA"; // Reusing generic CTA style
+import CustomerSupportCTA from "./CustomerSupportCTA";
 
 const CustomerSupportPage = () => {
     return (
@@ -20,6 +20,7 @@ const CustomerSupportPage = () => {
                 <CustomerSupportConcurrency />
                 <CustomerSupportLatency />
                 <CustomerSupportScale />
+                <CustomerSupportCTA />
 
                 {/* Reusing this CTA component but passing children or specific props would be better if strictly needed, 
                     but strict adherence to screenshot for hero was the priority. 

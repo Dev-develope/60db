@@ -34,6 +34,7 @@ import AITrustPage from "./pages/AITrustPage/AITrustPage";
 import TelecommunicationsPage from "./pages/TelecommunicationsPage/TelecommunicationsPage";
 import FinancialServicesPage from "./pages/FinancialServicesPage/FinancialServicesPage";
 import HealthcarePage from "./pages/HealthcarePage/HealthcarePage";
+import TechnologyPage from "./pages/TechnologyPage/TechnologyPage";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,7 @@ const App = () => (
           <Route path="/agents/telecommunications" element={<TelecommunicationsPage />} />
           <Route path="/agents/financial-services" element={<FinancialServicesPage />} />
           <Route path="/agents/healthcare" element={<HealthcarePage />} />
+          <Route path="/agents/technology" element={<TechnologyPage />} />
           <Route path="/blog/category/agents-platform-stories" element={<BlogCategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

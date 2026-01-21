@@ -68,11 +68,11 @@ const Header = () => {
         {
           title: "Industries",
           items: [
-            { name: "Telecommunications", desc: "Smarter conversations at scale", path: "/agents/telecom" },
-            { name: "Financial Services", desc: "Deliver secure service" },
-            { name: "Healthcare", desc: "Streamline patient operations" },
-            { name: "Technology", desc: "Drive growth with AI" },
-            { name: "Retail", desc: "Increase sales and loyalty" },
+            { name: "Telecommunications", desc: "Smarter conversations at scale", path: "/agents/telecommunications" },
+            { name: "Financial Services", desc: "Deliver secure service", path: "/agents/financial-services" },
+            { name: "Healthcare", desc: "Streamline patient operations", path: "/agents/healthcare" },
+            { name: "Technology", desc: "Drive growth with AI", path: "/agents/technology" },
+            { name: "Retail", desc: "Increase sales and loyalty", path: "/agents/retail" },
           ],
         },
         {

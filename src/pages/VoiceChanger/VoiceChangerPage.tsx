@@ -9,7 +9,7 @@ import VoiceChangerFAQ from "./VoiceChangerFAQ";
 
 const VoiceChangerPage = () => {
     return (
-        <div className="min-h-screen bg-white font-sans">
+        <div className="min-h-screen bg-background font-sans">
             <Header />
             <main className="pt-16">
                 <VoiceChangerHero />

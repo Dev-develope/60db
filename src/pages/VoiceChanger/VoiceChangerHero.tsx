@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const VoiceChangerHero = () => {
     return (
-        <section className="relative pt-32 pb-20 px-4 overflow-hidden bg-gradient-to-b from-white to-gray-50/50">
+        <section className="relative pt-32 pb-20 px-4 overflow-hidden bg-gradient-hero">
             <div className="max-w-7xl mx-auto text-center space-y-8 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -13,24 +13,24 @@ const VoiceChangerHero = () => {
                     transition={{ duration: 0.6 }}
                     className="space-y-6 max-w-4xl mx-auto"
                 >
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1]">
+                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground font-serif leading-[1.1]">
                         Transform your voice into another while preserving{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600">
+                        <span className="text-transparent bg-clip-text bg-gradient-espresso">
                             emotion, delivery, and nuance
                         </span>
                         .
                     </h1>
 
-                    <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
                         Full control over your performance. Capture every whisper, laugh, and accent
                         with our advanced medical-grade voice AI.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                        <Button size="lg" className="rounded-full px-8 h-12 text-base font-medium bg-black hover:bg-gray-800 text-white min-w-[160px]">
+                        <Button size="lg" className="rounded-full px-8 h-12 text-base font-medium min-w-[160px]">
                             Try For Free
                         </Button>
-                        <Button size="lg" variant="outline" className="rounded-full px-8 h-12 text-base font-medium border-gray-200 hover:bg-gray-50 text-gray-900 min-w-[160px]">
+                        <Button size="lg" variant="outline" className="rounded-full px-8 h-12 text-base font-medium min-w-[160px]">
                             View Pricing
                         </Button>
                     </div>
@@ -41,12 +41,12 @@ const VoiceChangerHero = () => {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="mt-20 max-w-3xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 p-2 overflow-hidden"
+                    className="mt-20 max-w-3xl mx-auto bg-card rounded-3xl shadow-card border border-border/50 p-2 overflow-hidden"
                 >
-                    <div className="bg-gray-50/50 rounded-2xl p-8 md:p-12 space-y-8">
+                    <div className="bg-background/50 rounded-2xl p-8 md:p-12 space-y-8">
                         <div className="text-center space-y-2">
-                            <h3 className="text-2xl font-semibold text-gray-900">What is an AI Voice Changer?</h3>
-                            <p className="text-gray-500">Enable mic access, record yourself reading some prompts and generate the sample in different voices.</p>
+                            <h3 className="text-2xl font-semibold text-foreground font-serif">What is an AI Voice Changer?</h3>
+                            <p className="text-muted-foreground">Enable mic access, record yourself reading some prompts and generate the sample in different voices.</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

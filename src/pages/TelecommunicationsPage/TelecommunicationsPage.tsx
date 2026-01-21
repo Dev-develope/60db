@@ -1,0 +1,97 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import TelecomHero from "./TelecomHero";
+import TelecomIntro from "./TelecomIntro";
+import TelecomFeatureSection from "./TelecomFeatureSection";
+import RelatedTopics from "./RelatedTopics";
+import TelecomCTA from "./TelecomCTA";
+import { Network, ShoppingCart, Settings } from "lucide-react";
+
+const TelecommunicationsPage = () => {
+    const scalingFeatures = [
+        {
+            title: "Customer support agents that speak, read, and see",
+            description: "Multimodal by design, agents understand spoken or written inputs, retrieve the right answers, and respond naturally in real time. ElevenLabs Agents interact just like a human would, across voice and chat.",
+        },
+        {
+            title: "Take action with external tool calls",
+            description: "Connect your agent to internal tools, APIs, and business systems. From activating a sim card to troubleshooting a new Wi-Fi device, agents can trigger real-world actions mid-conversation, securely and reliably.",
+        },
+        {
+            title: "Meet your customers where they are",
+            description: "Launch across phone lines, websites, apps, or embedded systems. ElevenLabs Agents are channel-agnostic and ready for global use, with multilingual support and telephony built in.",
+        },
+    ];
+
+    const shoppingFeatures = [
+        {
+            title: "Reduce cart abandonment",
+            description: "Our embedded shopping concierges are context-aware, proactively answering product questions, reducing cart abandonment, and driving higher conversion rates.",
+        },
+        {
+            title: "Proactively drive retention and upsell",
+            description: "Create marketing agents that automatically reach out when customers approach plan renewal or become eligible for new offers, helping increase retention and lifetime value.",
+        },
+        {
+            title: "Scale in-store experts",
+            description: "Enable customers to access on-demand expertise through QR code scans in physical locations. Customers get instant access to knowledgeable agents, ensuring no sales opportunity is lost to staffing limitations.",
+        },
+    ];
+
+    const workflowFeatures = [
+        {
+            title: "Integrate agents into your existing systems and workflows",
+            description: "Design structured workflows using intuitive tools. Our agents connect directly to your contact center and tools so you can define rules for handoffs to human agents.",
+        },
+        {
+            title: "Test guardrails and ensure compliance",
+            description: "Define success criteria, test tool calls, and ensure responses meet your standards - all before deploying to production. Our platform is built for the highest compliance standards, including GDPR, EU data residency, and zero data retention options.",
+        },
+        {
+            title: "Monitor performance and CX",
+            description: "Track agent accuracy, task completion, and overall customer experience through built-in analytics. Spot issues, optimize flows, and iterate confidently with full transparency.",
+        },
+    ];
+
+    return (
+        <div className="min-h-screen bg-background text-foreground">
+            <Header />
+
+            <main>
+                <TelecomHero />
+                <TelecomIntro />
+
+                <TelecomFeatureSection
+                    title="AI Agents that scale with your network's needs - from routine queries to service outage spikes"
+                    icon={Network}
+                    features={scalingFeatures}
+                    bgColor="bg-background"
+                    showVisual={true}
+                />
+
+                <TelecomFeatureSection
+                    title="Deliver contextually aware shopping concierges to increase LTV"
+                    icon={ShoppingCart}
+                    features={shoppingFeatures}
+                    bgColor="bg-secondary/30"
+                    showVisual={true}
+                />
+
+                <TelecomFeatureSection
+                    title="Create multi-agent workflows with strict guardrails and track results with in depth testing and analytics"
+                    icon={Settings}
+                    features={workflowFeatures}
+                    bgColor="bg-background"
+                    showVisual={true}
+                />
+
+                <RelatedTopics />
+                <TelecomCTA />
+            </main>
+
+            <Footer />
+        </div>
+    );
+};
+
+export default TelecommunicationsPage;

@@ -32,6 +32,7 @@ import IntegrationsPage from "./pages/IntegrationsPage/IntegrationsPage";
 import BlogCategoryPage from "./pages/BlogCategoryPage/BlogCategoryPage";
 import AITrustPage from "./pages/AITrustPage/AITrustPage";
 import TelecommunicationsPage from "./pages/TelecommunicationsPage/TelecommunicationsPage";
+import FinancialServicesPage from "./pages/FinancialServicesPage/FinancialServicesPage";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,7 @@ const App = () => (
           <Route path="/agents/integrations" element={<IntegrationsPage />} />
           <Route path="/agents/ai-trust-and-reliability" element={<AITrustPage />} />
           <Route path="/agents/telecommunications" element={<TelecommunicationsPage />} />
+          <Route path="/agents/financial-services" element={<FinancialServicesPage />} />
           <Route path="/blog/category/agents-platform-stories" element={<BlogCategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

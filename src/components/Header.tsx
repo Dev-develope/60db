@@ -289,7 +289,7 @@ const Header = () => {
                   Log in
                 </Button>
               </Link>
-              <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+              <Link to = "/signup" onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full">Get Started Free</Button>
               </Link>
             </div>

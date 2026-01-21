@@ -24,6 +24,7 @@ import ImageVideoPage from "./pages/ImageVideoPage/ImageVideoPage";
 import VoiceDesignPage from "./pages/VoiceDesignPage/VoiceDesignPage";
 import NotFound from "./pages/NotFound";
 import RealtimeSpeechToTextPage from "./pages/RealtimeSpeechToTextPage/RealtimeSpeechToTextPage";
+import VoiceChangerPage from "./pages/VoiceChanger/VoiceChangerPage";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/voice-design" element={<VoiceDesignPage />} />
           <Route path="/realtime-speech-to-text" element={<RealtimeSpeechToTextPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/voice-changer" element={<VoiceChangerPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

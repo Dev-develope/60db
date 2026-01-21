@@ -28,8 +28,9 @@ import VoiceChangerPage from "./pages/VoiceChanger/VoiceChangerPage";
 import VoiceCloningPage from "./pages/VoiceCloning/VoiceCloningPage";
 import DubbingStudioPage from "./pages/DubbingStudio/DubbingStudioPage";
 import AgentPage from "./pages/AgentsPage/AgentPage";
-import IntegrationsPage from "./pages/AgentsPage/IntegrationsPage";
-import TelecommunicationsPage from "./pages/AgentsPage/TelecommunicationsPage";
+import IntegrationsPage from "./pages/IntegrationsPage/IntegrationsPage";
+import BlogCategoryPage from "./pages/BlogCategoryPage/BlogCategoryPage";
+import AITrustPage from "./pages/AITrustPage/AITrustPage";
 
 const queryClient = new QueryClient();
 
@@ -67,7 +68,8 @@ const App = () => (
           <Route path="/dubbing-studio" element={<DubbingStudioPage />} />
           <Route path="/agents" element={<AgentPage />} />
           <Route path="/agents/integrations" element={<IntegrationsPage />} />
-          <Route path="/agents/telecom" element={<TelecommunicationsPage />} />
+          <Route path="/agents/ai-trust-and-reliability" element={<AITrustPage />} />
+          <Route path="/blog/category/agents-platform-stories" element={<BlogCategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -238,20 +238,36 @@ const Header = () => {
         {
           title: "Company",
           items: [
-            { name: "About", desc: "Our mission and team",path: "/about" },
-            { name: "Safety", desc: "Our commitment to safety",path: "/safety" },
-            { name: "Blog", desc: "Latest news and updates",path: "/blog" },
-            { name: "Careers", desc: "Join our team",path: "/careers" },
+            { name: "About", desc: "Our mission and team", path: "/about" },
+            {
+              name: "Safety",
+              desc: "Our commitment to safety",
+              path: "/safety",
+            },
+            { name: "Blog", desc: "Latest news and updates", path: "/blog" },
+            { name: "Careers", desc: "Join our team", path: "/careers" },
           ],
         },
         {
           title: "Initiatives",
           items: [
-            { name: "Impact Program", desc: "Making a difference" },
-            { name: "Voice Partnerships", desc: "Collaborate with us" },
-            { name: "Grants for Startups", desc: "Support for founders" },
-            { name: "For Students", desc: "Educational resources" },
-            { name: "Affiliate Program", desc: "Partner with us" },
+            {
+              name: "Impact Program",
+              desc: "Making a difference",
+              path: "/impact-program",
+            },
+            {
+              name: "Voice Partnerships",
+              desc: "Collaborate with us",
+              path: "/voice-data-partnerships",
+            },
+            {
+              name: "Grants for Startups",
+              desc: "Support for founders",
+              path: "/iconic-marketplace",
+            },
+            { name: "For Students", desc: "Educational resources", path: "#" },
+            { name: "Affiliate Program", desc: "Partner with us", path: "#" },
           ],
         },
       ],

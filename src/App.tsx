@@ -45,6 +45,9 @@ import AboutPage from "./pages/About/AboutPage";
 import SafetyPage from "./pages/Safety/SafetyPage";
 import BlogPage from "./pages/Blog/BlogPage";
 import CareersPage from "./pages/Careers/CareersPage";
+import ImpactProgramPage from "./pages/ImpactProgram/ImpactProgramPage";
+import VoiceDataPartnershipsPage from "./pages/VoiceDataPartnerships/VoiceDataPartnershipsPage";
+import IconicMarketplacePage from "./pages/IconicMarketplace/IconicMarketplacePage";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +63,15 @@ const App = () => (
           <Route path="/safety" element={<SafetyPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/careers" element={<CareersPage />} />
+          <Route path="/impact-program" element={<ImpactProgramPage />} />
+          <Route
+            path="/voice-data-partnerships"
+            element={<VoiceDataPartnershipsPage />}
+          />
+          <Route
+            path="/iconic-marketplace"
+            element={<IconicMarketplacePage />}
+          />
           <Route path="/home-2" element={<Home2 />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />

@@ -38,6 +38,7 @@ import TechnologyPage from "./pages/TechnologyPage/TechnologyPage";
 import RetailPage from "./pages/RetailPage/RetailPage";
 import CustomerSupportPage from "./pages/CustomerSupportPage/CustomerSupportPage";
 import LeadQualificationSupportPage from "./pages/LeadQualification/LeadQualificationSupportPage";
+import AiReceptionistPage from "./pages/AiReceptionist/AiReceptionistPage";
 
 const queryClient = new QueryClient();
 
@@ -83,6 +84,8 @@ const App = () => (
           <Route path="/agents/retail-ecommerce" element={<RetailPage />} />
           <Route path="/agents/customer-support" element={<CustomerSupportPage />} />
           <Route path="lead-qualification" element={<LeadQualificationSupportPage />} />
+          {/* ai-receptionist */}
+          <Route path="/ai-receptionist" element={<AiReceptionistPage />} />
           <Route path="/blog/category/agents-platform-stories" element={<BlogCategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

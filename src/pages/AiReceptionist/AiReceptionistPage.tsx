@@ -1,8 +1,13 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TelecomHero from "./AiReceptionistHero";
+import TelecomIntro from "./AiReceptionistIntro";
+import TelecomFeatureSection from "./AiReceptionistSection";
+import RelatedTopics from "./AiReceptionistTopics";
+import TelecomCTA from "./AiReceptionistCTA";
 import { Network, ShoppingCart, Settings } from "lucide-react";
 
-const TelecommunicationsPage = () => {
+const AiReceptionistPage = () => {
     const scalingFeatures = [
         {
             title: "Customer support agents that speak, read, and see",
@@ -89,4 +94,4 @@ const TelecommunicationsPage = () => {
     );
 };
 
-export default TelecommunicationsPage;
+export default AiReceptionistPage;

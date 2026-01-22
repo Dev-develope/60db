@@ -27,6 +27,19 @@ import RealtimeSpeechToTextPage from "./pages/RealtimeSpeechToTextPage/RealtimeS
 import VoiceChangerPage from "./pages/VoiceChanger/VoiceChangerPage";
 import VoiceCloningPage from "./pages/VoiceCloning/VoiceCloningPage";
 import DubbingStudioPage from "./pages/DubbingStudio/DubbingStudioPage";
+import AgentPage from "./pages/AgentsPage/AgentPage";
+import IntegrationsPage from "./pages/IntegrationsPage/IntegrationsPage";
+import BlogCategoryPage from "./pages/BlogCategoryPage/BlogCategoryPage";
+import AITrustPage from "./pages/AITrustPage/AITrustPage";
+import TelecommunicationsPage from "./pages/TelecommunicationsPage/TelecommunicationsPage";
+import FinancialServicesPage from "./pages/FinancialServicesPage/FinancialServicesPage";
+import HealthcarePage from "./pages/HealthcarePage/HealthcarePage";
+import TechnologyPage from "./pages/TechnologyPage/TechnologyPage";
+import RetailPage from "./pages/RetailPage/RetailPage";
+import CustomerSupportPage from "./pages/CustomerSupportPage/CustomerSupportPage";
+import LeadQualificationSupportPage from "./pages/LeadQualification/LeadQualificationSupportPage";
+import AiReceptionistPage from "./pages/AiReceptionist/AiReceptionistPage";
+import OutBondPage from "./pages/OutBonds/OutBondPage";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +75,20 @@ const App = () => (
           <Route path="/voice-changer" element={<VoiceChangerPage />} />
           <Route path="/voice-cloning" element={<VoiceCloningPage />} />
           <Route path="/dubbing-studio" element={<DubbingStudioPage />} />
+          <Route path="/agents" element={<AgentPage />} />
+          <Route path="/agents/integrations" element={<IntegrationsPage />} />
+          <Route path="/agents/ai-trust-and-reliability" element={<AITrustPage />} />
+          <Route path="/agents/telecommunications" element={<TelecommunicationsPage />} />
+          <Route path="/agents/financial-services" element={<FinancialServicesPage />} />
+          <Route path="/agents/healthcare" element={<HealthcarePage />} />
+          <Route path="/agents/technology" element={<TechnologyPage />} />
+          <Route path="/agents/retail-ecommerce" element={<RetailPage />} />
+          <Route path="/agents/customer-support" element={<CustomerSupportPage />} />
+          <Route path="lead-qualification" element={<LeadQualificationSupportPage />} />
+          {/* ai-receptionist */}
+          <Route path="/ai-receptionist" element={<AiReceptionistPage />} />
+          <Route path="/outbonds" element={<OutBondPage />} />
+          <Route path="/blog/category/agents-platform-stories" element={<BlogCategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

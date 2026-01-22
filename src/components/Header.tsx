@@ -59,8 +59,8 @@ const Header = () => {
         {
           title: "General",
           items: [
-            { name: "Product Overview", desc: "Discover 60db.ai Agents" },
-            { name: "Integrations", desc: "Connect agents to tools" },
+            { name: "Product Overview", desc: "Discover 60db.ai Agents", path: "/agents" },
+            { name: "Integrations", desc: "Connect agents to tools", path: "/agents/integrations" },
             { name: "Customer Stories", desc: "Learn from success stories" },
             { name: "Trust & Reliability", desc: "Deploy safe AI agents" },
           ],
@@ -68,20 +68,20 @@ const Header = () => {
         {
           title: "Industries",
           items: [
-            { name: "Telecommunications", desc: "Smarter conversations at scale" },
-            { name: "Financial Services", desc: "Deliver secure service" },
-            { name: "Healthcare", desc: "Streamline patient operations" },
-            { name: "Technology", desc: "Drive growth with AI" },
-            { name: "Retail", desc: "Increase sales and loyalty" },
+            { name: "Telecommunications", desc: "Smarter conversations at scale", path: "/agents/telecommunications" },
+            { name: "Financial Services", desc: "Deliver secure service", path: "/agents/financial-services" },
+            { name: "Healthcare", desc: "Streamline patient operations", path: "/agents/healthcare" },
+            { name: "Technology", desc: "Drive growth with AI", path: "/agents/technology" },
+            { name: "Retail", desc: "Increase sales and loyalty", path: "/agents/retail-ecommerce" },
           ],
         },
         {
           title: "Use Cases",
           items: [
-            { name: "Customer Support", desc: "Resolve inquiries with AI" },
-            { name: "Lead Qualification", desc: "Turn leads into revenue" },
-            { name: "AI Receptionist", desc: "Streamline operations" },
-            { name: "Outbound", desc: "Scale outreach efficiently" },
+            { name: "Customer Support", desc: "Resolve inquiries with AI",path: "/agents/customer-support" },
+            { name: "Lead Qualification", desc: "Turn leads into revenue",path: "/lead-qualification" },
+            { name: "AI Receptionist", desc: "Streamline operations",path: "/ai-receptionist" },
+            { name: "Outbound", desc: "Scale outreach efficiently",path: "/outbonds" },
           ],
         },
       ],
@@ -289,7 +289,7 @@ const Header = () => {
                   Log in
                 </Button>
               </Link>
-              <Link to = "/signup" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full">Get Started Free</Button>
               </Link>
             </div>

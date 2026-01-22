@@ -23,32 +23,96 @@ const Header = () => {
         {
           title: "Platform",
           items: [
-            { name: "Image & Video", desc: "Discover our visual tools", path: "/image-video" },
-            { name: "Products Overview", desc: "Discover 60db.ai Voice Platform", path: "/products" },
-            { name: "Studio", desc: "Generate long-form audio", path: "/studio" },
-            { name: "Voice Library", desc: "Voices for any character", path: "/voice-library" },
-            { name: "Productions", desc: "Human-edited content", path: "/production" },
-            { name: "Mobile App", desc: "Lifelike voiceovers on the go", path: "/mobile" },
+            {
+              name: "Image & Video",
+              desc: "Discover our visual tools",
+              path: "/image-video",
+            },
+            {
+              name: "Products Overview",
+              desc: "Discover 60db.ai Voice Platform",
+              path: "/products",
+            },
+            {
+              name: "Studio",
+              desc: "Generate long-form audio",
+              path: "/studio",
+            },
+            {
+              name: "Voice Library",
+              desc: "Voices for any character",
+              path: "/voice-library",
+            },
+            {
+              name: "Productions",
+              desc: "Human-edited content",
+              path: "/production",
+            },
+            {
+              name: "Mobile App",
+              desc: "Lifelike voiceovers on the go",
+              path: "/mobile",
+            },
           ],
         },
         {
           title: "Create",
           items: [
-            { name: "Text to Speech", desc: "Generate human-like AI Voice", path: "/text-to-speech" },
-            { name: "Speech to Text", desc: "Transcribe audio and video", path: "/speech-to-text" },
-            { name: "Voice Isolator", desc: "Extract crystal-clear speech", path: "/voice-isolator" },
-            { name: "Sound Effects", desc: "Generate any sound", path: "/sound-effects" },
-            { name: "Music", desc: "Convert an idea into a song", path: "/music" },
+            {
+              name: "Text to Speech",
+              desc: "Generate human-like AI Voice",
+              path: "/text-to-speech",
+            },
+            {
+              name: "Speech to Text",
+              desc: "Transcribe audio and video",
+              path: "/speech-to-text",
+            },
+            {
+              name: "Voice Isolator",
+              desc: "Extract crystal-clear speech",
+              path: "/voice-isolator",
+            },
+            {
+              name: "Sound Effects",
+              desc: "Generate any sound",
+              path: "/sound-effects",
+            },
+            {
+              name: "Music",
+              desc: "Convert an idea into a song",
+              path: "/music",
+            },
           ],
         },
         {
           title: "Advanced",
           items: [
-            { name: "Voice Design", desc: "Generate a custom voice", path: "/voice-design" },
-            { name: "Realtime Speech", desc: "Live speech transcription", path: "/realtime-speech-to-text" },
-            { name: "Voice Changer", desc: "Deliver audio in any voice", path: "/voice-changer" },
-            { name: "Voice Cloning", desc: "Create a replica of your voice", path: "/voice-cloning" },
-            { name: "Dubbing", desc: "Localize audio content", path: "/dubbing-studio" },
+            {
+              name: "Voice Design",
+              desc: "Generate a custom voice",
+              path: "/voice-design",
+            },
+            {
+              name: "Realtime Speech",
+              desc: "Live speech transcription",
+              path: "/realtime-speech-to-text",
+            },
+            {
+              name: "Voice Changer",
+              desc: "Deliver audio in any voice",
+              path: "/voice-changer",
+            },
+            {
+              name: "Voice Cloning",
+              desc: "Create a replica of your voice",
+              path: "/voice-cloning",
+            },
+            {
+              name: "Dubbing",
+              desc: "Localize audio content",
+              path: "/dubbing-studio",
+            },
           ],
         },
       ],
@@ -59,8 +123,16 @@ const Header = () => {
         {
           title: "General",
           items: [
-            { name: "Product Overview", desc: "Discover 60db.ai Agents", path: "/agents" },
-            { name: "Integrations", desc: "Connect agents to tools", path: "/agents/integrations" },
+            {
+              name: "Product Overview",
+              desc: "Discover 60db.ai Agents",
+              path: "/agents",
+            },
+            {
+              name: "Integrations",
+              desc: "Connect agents to tools",
+              path: "/agents/integrations",
+            },
             { name: "Customer Stories", desc: "Learn from success stories" },
             { name: "Trust & Reliability", desc: "Deploy safe AI agents" },
           ],
@@ -68,20 +140,56 @@ const Header = () => {
         {
           title: "Industries",
           items: [
-            { name: "Telecommunications", desc: "Smarter conversations at scale", path: "/agents/telecommunications" },
-            { name: "Financial Services", desc: "Deliver secure service", path: "/agents/financial-services" },
-            { name: "Healthcare", desc: "Streamline patient operations", path: "/agents/healthcare" },
-            { name: "Technology", desc: "Drive growth with AI", path: "/agents/technology" },
-            { name: "Retail", desc: "Increase sales and loyalty", path: "/agents/retail-ecommerce" },
+            {
+              name: "Telecommunications",
+              desc: "Smarter conversations at scale",
+              path: "/agents/telecommunications",
+            },
+            {
+              name: "Financial Services",
+              desc: "Deliver secure service",
+              path: "/agents/financial-services",
+            },
+            {
+              name: "Healthcare",
+              desc: "Streamline patient operations",
+              path: "/agents/healthcare",
+            },
+            {
+              name: "Technology",
+              desc: "Drive growth with AI",
+              path: "/agents/technology",
+            },
+            {
+              name: "Retail",
+              desc: "Increase sales and loyalty",
+              path: "/agents/retail-ecommerce",
+            },
           ],
         },
         {
           title: "Use Cases",
           items: [
-            { name: "Customer Support", desc: "Resolve inquiries with AI",path: "/agents/customer-support" },
-            { name: "Lead Qualification", desc: "Turn leads into revenue",path: "/lead-qualification" },
-            { name: "AI Receptionist", desc: "Streamline operations",path: "/ai-receptionist" },
-            { name: "Outbound", desc: "Scale outreach efficiently",path: "/outbonds" },
+            {
+              name: "Customer Support",
+              desc: "Resolve inquiries with AI",
+              path: "/agents/customer-support",
+            },
+            {
+              name: "Lead Qualification",
+              desc: "Turn leads into revenue",
+              path: "/lead-qualification",
+            },
+            {
+              name: "AI Receptionist",
+              desc: "Streamline operations",
+              path: "/ai-receptionist",
+            },
+            {
+              name: "Outbound",
+              desc: "Scale outreach efficiently",
+              path: "/outbonds",
+            },
           ],
         },
       ],
@@ -103,10 +211,22 @@ const Header = () => {
           title: "APIs",
           items: [
             { name: "Agents API", desc: "Deploy Voice Agents", path: "#" },
-            { name: "Text to Speech", desc: "Generate speech via API", path: "/text-to-speech" },
-            { name: "Speech to Text", desc: "Transcribe in bulk", path: "/speech-to-text" },
+            {
+              name: "Text to Speech",
+              desc: "Generate speech via API",
+              path: "/text-to-speech-api",
+            },
+            {
+              name: "Speech to Text",
+              desc: "Transcribe in bulk",
+              path: "/speech-to-text",
+            },
             { name: "Dubbing API", desc: "Translate audio via API", path: "#" },
-            { name: "Music API", desc: "Compose songs via API", path: "/music" },
+            {
+              name: "Music API",
+              desc: "Compose songs via API",
+              path: "/music",
+            },
           ],
         },
       ],

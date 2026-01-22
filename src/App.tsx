@@ -16,6 +16,7 @@ import VoiceLibraryPage from "./pages/VoiceLibraryPage/VoiceLibraryPage";
 import ProductionPage from "./pages/ProductionPage/ProductionPage";
 import MobilePage from "./pages/MobilePage/MobilePage";
 import TextToSpeechPage from "./pages/TextToSpeechPage/TextToSpeechPage";
+import TextToSpeechAPIPage from "./pages/TextToSpeechAPI/TextToSpeechAPIPage";
 import SpeechToTextPage from "./pages/SpeechToTextPage/SpeechToTextPage";
 import VoiceIsolatorPage from "./pages/VoiceIsolatorPage/VoiceIsolatorPage";
 import SoundEffectsPage from "./pages/SoundEffectsPage/SoundEffectsPage";
@@ -63,6 +64,7 @@ const App = () => (
           <Route path="/production" element={<ProductionPage />} />
           <Route path="/mobile" element={<MobilePage />} />
           <Route path="/text-to-speech" element={<TextToSpeechPage />} />
+          <Route path="/text-to-speech-api" element={<TextToSpeechAPIPage />} />
           <Route path="/speech-to-text" element={<SpeechToTextPage />} />
           <Route path="/voice-isolator" element={<VoiceIsolatorPage />} />
           <Route path="/sound-effects" element={<SoundEffectsPage />} />

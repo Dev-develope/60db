@@ -48,6 +48,8 @@ import CareersPage from "./pages/Careers/CareersPage";
 import ImpactProgramPage from "./pages/ImpactProgram/ImpactProgramPage";
 import VoiceDataPartnershipsPage from "./pages/VoiceDataPartnerships/VoiceDataPartnershipsPage";
 import IconicMarketplacePage from "./pages/IconicMarketplace/IconicMarketplacePage";
+import StudentsPage from "./pages/Students/StudentsPage";
+import AffiliatesPage from "./pages/Affiliates/AffiliatesPage";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +74,8 @@ const App = () => (
             path="/iconic-marketplace"
             element={<IconicMarketplacePage />}
           />
+          <Route path="/students" element={<StudentsPage />} />
+          <Route path="/affiliates" element={<AffiliatesPage />} />
           <Route path="/home-2" element={<Home2 />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />

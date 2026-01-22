@@ -266,8 +266,16 @@ const Header = () => {
               desc: "Support for founders",
               path: "/iconic-marketplace",
             },
-            { name: "For Students", desc: "Educational resources", path: "#" },
-            { name: "Affiliate Program", desc: "Partner with us", path: "#" },
+            {
+              name: "For Students",
+              desc: "Educational resources",
+              path: "/students",
+            },
+            {
+              name: "Affiliate Program",
+              desc: "Partner with us",
+              path: "/affiliates",
+            },
           ],
         },
       ],

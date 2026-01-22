@@ -11,6 +11,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import path from "path";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -237,10 +238,10 @@ const Header = () => {
         {
           title: "Company",
           items: [
-            { name: "About", desc: "Our mission and team" },
-            { name: "Safety", desc: "Our commitment to safety" },
-            { name: "Blog", desc: "Latest news and updates" },
-            { name: "Careers", desc: "Join our team" },
+            { name: "About", desc: "Our mission and team",path: "/about" },
+            { name: "Safety", desc: "Our commitment to safety",path: "/safety" },
+            { name: "Blog", desc: "Latest news and updates",path: "/blog" },
+            { name: "Careers", desc: "Join our team",path: "/careers" },
           ],
         },
         {

@@ -41,6 +41,10 @@ import CustomerSupportPage from "./pages/CustomerSupportPage/CustomerSupportPage
 import LeadQualificationSupportPage from "./pages/LeadQualification/LeadQualificationSupportPage";
 import AiReceptionistPage from "./pages/AiReceptionist/AiReceptionistPage";
 import OutBondPage from "./pages/OutBonds/OutBondPage";
+import AboutPage from "./pages/About/AboutPage";
+import SafetyPage from "./pages/Safety/SafetyPage";
+import BlogPage from "./pages/Blog/BlogPage";
+import CareersPage from "./pages/Careers/CareersPage";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +56,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/safety" element={<SafetyPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/careers" element={<CareersPage />} />
           <Route path="/home-2" element={<Home2 />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />

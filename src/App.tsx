@@ -70,25 +70,46 @@ const App = () => (
           <Route path="/image-video" element={<ImageVideoPage />} />
           <Route path="/voice-design" element={<VoiceDesignPage />} />
           <Route path="/voice-design" element={<VoiceDesignPage />} />
-          <Route path="/realtime-speech-to-text" element={<RealtimeSpeechToTextPage />} />
+          <Route
+            path="/realtime-speech-to-text"
+            element={<RealtimeSpeechToTextPage />}
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="/voice-changer" element={<VoiceChangerPage />} />
           <Route path="/voice-cloning" element={<VoiceCloningPage />} />
           <Route path="/dubbing-studio" element={<DubbingStudioPage />} />
           <Route path="/agents" element={<AgentPage />} />
           <Route path="/agents/integrations" element={<IntegrationsPage />} />
-          <Route path="/agents/ai-trust-and-reliability" element={<AITrustPage />} />
-          <Route path="/agents/telecommunications" element={<TelecommunicationsPage />} />
-          <Route path="/agents/financial-services" element={<FinancialServicesPage />} />
+          <Route
+            path="/agents/ai-trust-and-reliability"
+            element={<AITrustPage />}
+          />
+          <Route
+            path="/agents/telecommunications"
+            element={<TelecommunicationsPage />}
+          />
+          <Route
+            path="/agents/financial-services"
+            element={<FinancialServicesPage />}
+          />
           <Route path="/agents/healthcare" element={<HealthcarePage />} />
           <Route path="/agents/technology" element={<TechnologyPage />} />
           <Route path="/agents/retail-ecommerce" element={<RetailPage />} />
-          <Route path="/agents/customer-support" element={<CustomerSupportPage />} />
-          <Route path="lead-qualification" element={<LeadQualificationSupportPage />} />
+          <Route
+            path="/agents/customer-support"
+            element={<CustomerSupportPage />}
+          />
+          <Route
+            path="/lead-qualification"
+            element={<LeadQualificationSupportPage />}
+          />
           {/* ai-receptionist */}
           <Route path="/ai-receptionist" element={<AiReceptionistPage />} />
           <Route path="/outbonds" element={<OutBondPage />} />
-          <Route path="/blog/category/agents-platform-stories" element={<BlogCategoryPage />} />
+          <Route
+            path="/blog/category/agents-platform-stories"
+            element={<BlogCategoryPage />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

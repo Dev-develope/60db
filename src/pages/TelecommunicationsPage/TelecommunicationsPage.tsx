@@ -1,6 +1,11 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Network, ShoppingCart, Settings } from "lucide-react";
+import TelecomHero from "./TelecomHero";
+import TelecomIntro from "./TelecomIntro";
+import TelecomFeatureSection from "./TelecomFeatureSection";
+import RelatedTopics from "./RelatedTopics";
+import TelecomCTA from "./TelecomCTA";
 
 const TelecommunicationsPage = () => {
     const scalingFeatures = [

@@ -1,4 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const features = [
   {
@@ -48,8 +54,8 @@ const TextToSpeechAPIFeatures = () => {
             Everything you need to build production-ready speech
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Generate expressive, controllable speech with models built for real-time, long-form, and
-            production use.
+            Generate expressive, controllable speech with models built for
+            real-time, long-form, and production use.
           </p>
         </div>
 
@@ -61,7 +67,9 @@ const TextToSpeechAPIFeatures = () => {
                 <CardTitle className="text-xl">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base">{feature.description}</CardDescription>
+                <CardDescription className="text-base">
+                  {feature.description}
+                </CardDescription>
               </CardContent>
             </Card>
           ))}

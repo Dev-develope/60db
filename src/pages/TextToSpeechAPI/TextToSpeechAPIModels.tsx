@@ -1,4 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const models = [
@@ -48,14 +54,17 @@ const TextToSpeechAPIModels = () => {
             Built on the most powerful Voice AI models
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose the right model for your use case: from ultra-low latency agents to expressive,
-            long-form narration.
+            Choose the right model for your use case: from ultra-low latency
+            agents to expressive, long-form narration.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           {models.map((model) => (
-            <Card key={model.name} className={`flex flex-col ${model.highlighted ? "border-primary/50 md:scale-105" : ""}`}>
+            <Card
+              key={model.name}
+              className={`flex flex-col ${model.highlighted ? "border-primary/50 md:scale-105" : ""}`}
+            >
               <CardHeader>
                 <CardTitle className="text-2xl">{model.name}</CardTitle>
                 <CardDescription>{model.subtitle}</CardDescription>
@@ -63,7 +72,10 @@ const TextToSpeechAPIModels = () => {
               <CardContent className="flex-1">
                 <ul className="space-y-3 mb-6">
                   {model.features.map((feature) => (
-                    <li key={feature} className="text-sm flex items-start gap-2">
+                    <li
+                      key={feature}
+                      className="text-sm flex items-start gap-2"
+                    >
                       <span className="text-primary mt-1">✓</span>
                       <span>{feature}</span>
                     </li>

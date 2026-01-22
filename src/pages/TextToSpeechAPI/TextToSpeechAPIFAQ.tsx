@@ -63,7 +63,11 @@ const TextToSpeechAPIFAQ = () => {
 
         <Accordion type="single" collapsible className="w-full space-y-2">
           {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="border border-border rounded-lg px-4">
+            <AccordionItem
+              key={index}
+              value={`item-${index}`}
+              className="border border-border rounded-lg px-4"
+            >
               <AccordionTrigger className="hover:no-underline py-4">
                 <span className="text-left font-semibold">{faq.question}</span>
               </AccordionTrigger>

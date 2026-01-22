@@ -1,15 +1,23 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const blogPosts = [
   {
     title: "Getting Started with Text-to-Speech API",
-    description: "Learn how to integrate our TTS API into your application in minutes.",
+    description:
+      "Learn how to integrate our TTS API into your application in minutes.",
     category: "Getting Started",
   },
   {
     title: "Best Practices for Production Voice Applications",
-    description: "Optimize latency, quality, and cost in your voice-powered applications.",
+    description:
+      "Optimize latency, quality, and cost in your voice-powered applications.",
     category: "Best Practices",
   },
   {
@@ -26,12 +34,14 @@ const blogPosts = [
   },
   {
     title: "Custom Voice Cloning for Brand Voice",
-    description: "Create a unique brand voice with our voice cloning technology.",
+    description:
+      "Create a unique brand voice with our voice cloning technology.",
     category: "Features",
   },
   {
     title: "Emotion and Delivery Control in Speech",
-    description: "Master expressive speech generation with emotion tags and delivery cues.",
+    description:
+      "Master expressive speech generation with emotion tags and delivery cues.",
     category: "Advanced",
   },
 ];
@@ -51,12 +61,17 @@ const TextToSpeechAPIBlog = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
-            <Card key={post.title} className="border border-border flex flex-col hover:border-primary/50 transition-colors cursor-pointer">
+            <Card
+              key={post.title}
+              className="border border-border flex flex-col hover:border-primary/50 transition-colors cursor-pointer"
+            >
               <CardHeader className="pb-4">
                 <div className="text-xs font-semibold text-primary mb-2">
                   {post.category}
                 </div>
-                <CardTitle className="text-lg line-clamp-2">{post.title}</CardTitle>
+                <CardTitle className="text-lg line-clamp-2">
+                  {post.title}
+                </CardTitle>
               </CardHeader>
               <CardContent className="flex-1">
                 <CardDescription className="line-clamp-2">

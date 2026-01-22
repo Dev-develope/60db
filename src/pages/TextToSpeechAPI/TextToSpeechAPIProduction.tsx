@@ -9,7 +9,8 @@ const productionFeatures = [
   },
   {
     title: "Python and TypeScript SDKs",
-    description: "Official SDKs for seamless integration with your existing tech stack.",
+    description:
+      "Official SDKs for seamless integration with your existing tech stack.",
     icon: "⚙️",
   },
   {
@@ -29,7 +30,8 @@ const TextToSpeechAPIProduction = () => {
             APIs built for production
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Trusted by enterprise customers worldwide for mission-critical applications.
+            Trusted by enterprise customers worldwide for mission-critical
+            applications.
           </p>
         </div>
 
@@ -41,7 +43,9 @@ const TextToSpeechAPIProduction = () => {
                 <CardTitle className="text-lg">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {feature.description}
+                </p>
               </CardContent>
             </Card>
           ))}

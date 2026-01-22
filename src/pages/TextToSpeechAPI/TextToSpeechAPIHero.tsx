@@ -16,8 +16,9 @@ const TextToSpeechAPIHero = () => {
           </div>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Build with high-quality, controllable speech generation for real-time and bulk
-            applications. Models optimized for latency, fidelity, and long-form consistency.
+            Build with high-quality, controllable speech generation for
+            real-time and bulk applications. Models optimized for latency,
+            fidelity, and long-form consistency.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
@@ -42,10 +43,11 @@ const TextToSpeechAPIHero = () => {
 
             <div className="space-y-4">
               <p className="text-sm text-muted-foreground italic">
-                "In the ancient land of Eldoria, where skies shimmered and forests whispered
-                secrets to the wind, lived a dragon named Zephyros. Not the 'burn it all down'
-                kind... but he was gentle, wise, with eyes like old stars. Even the birds fell
-                silent when he passed."
+                "In the ancient land of Eldoria, where skies shimmered and
+                forests whispered secrets to the wind, lived a dragon named
+                Zephyros. Not the 'burn it all down' kind... but he was gentle,
+                wise, with eyes like old stars. Even the birds fell silent when
+                he passed."
               </p>
 
               <div className="flex items-center justify-between">
@@ -69,7 +71,9 @@ const TextToSpeechAPIHero = () => {
 
           {/* Companies */}
           <div className="pt-16 border-t border-border">
-            <p className="text-sm text-muted-foreground mb-6">Trusted by leading companies</p>
+            <p className="text-sm text-muted-foreground mb-6">
+              Trusted by leading companies
+            </p>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-items-center opacity-60">
               <div className="font-semibold">60db</div>
               <div className="font-semibold">Meta</div>

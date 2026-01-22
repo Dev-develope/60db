@@ -283,7 +283,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur-lg">
+    <header className="fixed top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur-lg">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">

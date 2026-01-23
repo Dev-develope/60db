@@ -137,12 +137,12 @@ const Header = () => {
             {
               name: "Customer Stories",
               desc: "Learn from success stories",
-              path: "/agents/ai-trust-and-reliability"
+              path: "/blog/category/agents-platform-stories"
             },
             {
               name: "Trust & Reliability",
               desc: "Deploy safe AI agents",
-              path: "/blog/category/agents-platform-stories"
+              path: "/agents/ai-trust-and-reliability"
             },
           ],
         },

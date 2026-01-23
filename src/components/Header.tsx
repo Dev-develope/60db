@@ -134,8 +134,16 @@ const Header = () => {
               desc: "Connect agents to tools",
               path: "/agents/integrations",
             },
-            { name: "Customer Stories", desc: "Learn from success stories" },
-            { name: "Trust & Reliability", desc: "Deploy safe AI agents" },
+            {
+              name: "Customer Stories",
+              desc: "Learn from success stories",
+              path: "/agents/ai-trust-and-reliability"
+            },
+            {
+              name: "Trust & Reliability",
+              desc: "Deploy safe AI agents",
+              path: "/blog/category/agents-platform-stories"
+            },
           ],
         },
         {
@@ -435,7 +443,9 @@ const Header = () => {
                 </Button>
               </Link>
               <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full">Get Started Free</Button>
+                <Button className="w-full">
+                  Get Started Free
+                </Button>
               </Link>
             </div>
           </nav>

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const creators = [
     {
@@ -81,7 +81,7 @@ const CreatorsSection = () => {
 
                 <div className="flex flex-col sm:flex-row items-start gap-4">
                     <Button variant="secondary" className="rounded-full px-6 bg-secondary/80 hover:bg-secondary text-secondary-foreground font-semibold" asChild>
-                        <Link to="/signup">
+                        <Link href="/signup">
                             GET STARTED
                         </Link>
                     </Button>

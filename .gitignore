@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Next.js
+.next/
+out/
+
+# Node
+node_modules/
+
+# Env
+.env*
+
+.next/
+node_modules/
+.env*
+

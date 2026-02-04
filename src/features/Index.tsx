@@ -4,8 +4,88 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Mic, Volume2, Globe, Zap, Users, Code, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import CreatorsSection from "@/components/CreatorsSection";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useState, useEffect, useRef } from "react";
+import { getVoices, generateTTS } from "@/lib/api";
+import { toast } from "sonner";
 
 const Index = () => {
+  const [voices, setVoices] = useState<any[]>([]);
+  const [selectedVoice, setSelectedVoice] = useState<any>(null);
+  const [isLoadingVoices, setIsLoadingVoices] = useState(true);
+  const [ttsText, setTtsText] = useState("Welcome to the future of voice AI. With 60db, you can create...");
+  const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playSample = (voice: any) => {
+    const sampleUrl = voice?.sample_url || voice?.preview_url;
+    if (!sampleUrl) {
+      toast.error("No sample available for this voice");
+      return;
+    }
+
+    if (playingVoiceId === voice.voice_id) {
+      audioRef.current?.pause();
+      setPlayingVoiceId(null);
+      return;
+    }
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+
+    const audio = new Audio(sampleUrl);
+    audioRef.current = audio;
+    setPlayingVoiceId(voice.voice_id);
+
+    audio.play().catch((err) => {
+      console.error("Audio playback failed:", err);
+      setPlayingVoiceId(null);
+    });
+
+    audio.onended = () => {
+      setPlayingVoiceId(null);
+    };
+  };
+
+
+  useEffect(() => {
+    const fetchVoices = async () => {
+      try {
+        const response = await getVoices();
+        console.log("Voices response:", response);
+        if (response?.success) {
+          const allVoices = [
+            ...(response?.data?.cloned_voices || []),
+            ...(response?.data?.built_in_voices || []),
+          ];
+          setVoices(allVoices);
+          if (allVoices.length > 0) {
+            setSelectedVoice(allVoices[0]);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch voices:", error);
+      } finally {
+        setIsLoadingVoices(false);
+      }
+    };
+
+    fetchVoices();
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
   const logos = [
     "The New York Times",
     "Spotify",
@@ -148,25 +228,107 @@ const Index = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-3">
                     <label className="text-sm font-medium text-foreground">Voice</label>
-                    <div className="flex items-center gap-3 p-3 bg-background rounded-lg border border-border">
-                      <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                        <Users className="h-5 w-5 text-foreground" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-foreground">Sarah</div>
-                        <div className="text-xs text-muted">American English</div>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <Select
+                        value={selectedVoice?.voice_id}
+                        onValueChange={(id) => {
+                          const voice = voices.find((v) => v.voice_id === id);
+                          setSelectedVoice(voice);
+                          if (playingVoiceId) {
+                            audioRef.current?.pause();
+                            setPlayingVoiceId(null);
+                          }
+                        }}
+                      >
+                        <SelectTrigger className="w-full h-auto p-3 bg-background border-border flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+                            <Users className="h-5 w-5 text-foreground" />
+                          </div>
+                          <div className="text-left flex-1">
+                            <div className="font-medium text-foreground">
+                              {selectedVoice?.name || "Select a voice"}
+                            </div>
+                            <div className="text-xs text-muted">
+                              {selectedVoice?.labels?.accent || selectedVoice?.category || "Neutral"}
+                            </div>
+                          </div>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {voices.map((voice) => (
+                            <SelectItem key={voice.voice_id} value={voice.voice_id}>
+                              <div className="flex items-center justify-between w-full min-w-[200px]">
+                                <div className="flex flex-col">
+                                  <span className="font-medium">{voice.name}</span>
+                                  <span className="text-xs text-muted">
+                                    {voice.labels?.accent || voice.category || "Neutral"}
+                                  </span>
+                                </div>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      {selectedVoice && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-12 w-12 rounded-lg border border-border shrink-0"
+                          onClick={() => playSample(selectedVoice)}
+                        >
+                          {playingVoiceId === selectedVoice.voice_id ? (
+                            <div className="flex gap-1 items-end h-3">
+                              <div className="w-1 bg-primary animate-wave h-full" />
+                              <div className="w-1 bg-primary animate-wave h-2/3" />
+                              <div className="w-1 bg-primary animate-wave h-3/4" />
+                            </div>
+                          ) : (
+                            <Volume2 className="h-5 w-5" />
+                          )}
+                        </Button>
+                      )}
                     </div>
                   </div>
                   <div className="space-y-3">
                     <label className="text-sm font-medium text-foreground">Text</label>
-                    <div className="p-3 bg-background rounded-lg border border-border text-sm text-muted">
-                      Welcome to the future of voice AI. With 60db, you can create...
-                    </div>
+                    <Textarea
+                      className="min-h-[64px] bg-background border-border text-sm resize-none"
+                      value={ttsText}
+                      onChange={(e) => setTtsText(e.target.value)}
+                      placeholder="Enter text to generate speech..."
+                    />
                   </div>
                 </div>
                 <div className="mt-4 flex items-center gap-4">
-                  <Button variant="default" size="sm">
+                  <Button
+                    variant="default"
+                    size="sm"
+                    onClick={async () => {
+                      if (!selectedVoice) {
+                        toast.error("Please select a voice first");
+                        return;
+                      }
+                      if (!ttsText.trim()) {
+                        toast.error("Please enter some text");
+                        return;
+                      }
+
+                      const t = toast.loading("Generating speech...");
+                      try {
+                        const response = await generateTTS(ttsText, selectedVoice.voice_id);
+                        if (response?.success && response?.backendResponse?.audio_base64) {
+                          const audioBase64 = response.backendResponse.audio_base64;
+                          const audioSrc = `data:audio/wav;base64,${audioBase64}`;
+                          const audio = new Audio(audioSrc);
+                          audio.play().catch(e => console.error("Error playing generated audio", e));
+                          toast.success("Speech generated and playing", { id: t });
+                        } else {
+                          toast.success("Speech generated successfully", { id: t });
+                        }
+                      } catch (error) {
+                        toast.error("Failed to generate speech", { id: t });
+                      }
+                    }}
+                  >
                     <Play className="h-4 w-4 mr-2" />
                     Generate
                   </Button>

@@ -1,16 +1,63 @@
 
-import { useState } from "react";
-import { Play, Mic, SkipBack, SkipForward } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Play, Mic, SkipBack, SkipForward, Volume2, Globe, Users } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Mousewheel, Autoplay } from "swiper/modules";
 import "swiper/css/mousewheel";
 import "swiper/css";
-import "swiper/css/free-mode"; // Required for slidesPerView: "auto"
+import "swiper/css/free-mode";
 import "swiper/css/autoplay";
+import { getVoices, generateTTS } from "@/lib/api";
+import { toast } from "sonner";
+import { Textarea } from "@/components/ui/textarea";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 const TextToSpeechDemo = () => {
+    const MAX_CHARS = 100;
     const [activeTab, setActiveTab] = useState("Text to Speech");
     const [viewMode, setViewMode] = useState<"demo" | "code">("demo");
+    const [ttsText, setTtsText] = useState("In the ancient land of Eldoria, where skies shimmered and forests, whispered secrets to the wind, lived a dragon named Zephyros.");
+    const [voices, setVoices] = useState<any[]>([]);
+    const [selectedVoice, setSelectedVoice] = useState<any>(null);
+    const [isLoadingVoices, setIsLoadingVoices] = useState(true);
+    const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        const fetchVoices = async () => {
+            try {
+                const response = await getVoices();
+                if (response?.success) {
+                    const allVoices = [
+                        ...(response?.data?.cloned_voices || []),
+                        ...(response?.data?.built_in_voices || []),
+                    ];
+                    setVoices(allVoices);
+                    if (allVoices.length > 0) {
+                        setSelectedVoice(allVoices[0]);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch voices:", error);
+            } finally {
+                setIsLoadingVoices(false);
+            }
+        };
+
+        fetchVoices();
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+            }
+        };
+    }, []);
 
     const tabs = ["Text to Speech", "Transcription", "Music", "Sound Effects"];
     const logos = [
@@ -87,6 +134,36 @@ const audio = await elevenlabs.textToSoundEffects.convert({
         );
     };
 
+    const playSample = (voice: any) => {
+        const sampleUrl = voice?.sample_url || voice?.preview_url;
+        if (!sampleUrl) {
+            toast.error("No sample available for this voice");
+            return;
+        }
+
+        if (playingVoiceId === voice.voice_id) {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                setPlayingVoiceId(null);
+            }
+            return;
+        }
+
+        if (audioRef.current) {
+            audioRef.current.pause();
+        }
+
+        const audio = new Audio(sampleUrl);
+        audioRef.current = audio;
+        setPlayingVoiceId(voice.voice_id);
+
+        audio.play();
+
+        audio.onended = () => {
+            setPlayingVoiceId(null);
+        };
+    };
+
     const renderContent = () => {
         if (viewMode === "code") {
             return renderCode();
@@ -96,30 +173,125 @@ const audio = await elevenlabs.textToSoundEffects.convert({
             case "Text to Speech":
                 return (
                     <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm mb-10 relative">
-                        <p className="text-lg leading-relaxed text-foreground/80 mb-8 font-light">
-                            In the ancient land of Eldoria, where skies shimmered and forests,
-                            whispered secrets to the wind, lived a dragon named Zephyros.
-                            <span className="text-muted-foreground/60"> [sarcastically] </span>
-                            Not the "burn it all down" kind...
-                            <span className="text-muted-foreground/60"> [giggles] </span>
-                            but he was gentle, wise, with eyes like old stars.
-                            <span className="text-muted-foreground/60"> [whispers] </span>
-                            Even the birds fell silent when he passed.
-                        </p>
+                        <div className="space-y-3 mb-8">
+                            <div className="flex items-center justify-between">
+                                <label className="text-sm font-medium text-foreground opacity-60">
+                                    Input Text
+                                </label>
+                                <span
+                                    className={`text-xs ${ttsText.length > MAX_CHARS
+                                        ? 'text-destructive font-bold'
+                                        : 'text-muted-foreground/60'
+                                        }`}
+                                >
+                                    {ttsText.length} / {MAX_CHARS} characters
+                                </span>
+                            </div>
+
+                            <Textarea
+                                className="min-h-[120px] bg-transparent border-none text-lg leading-relaxed text-foreground/80 p-0 focus-visible:ring-0 resize-none font-light"
+                                value={ttsText}
+                                onChange={(e) => {
+                                    const text = e.target.value
+                                    if (text.length > MAX_CHARS) {
+                                        toast.error('Max limit of 100 characters reached')
+                                        return
+                                    }
+                                    setTtsText(text)
+                                }}
+                                placeholder="Enter text to generate speech..."
+                            />
+
+                            {ttsText.length > MAX_CHARS && (
+                                <p className="text-[10px] text-destructive mt-1 font-medium italic">
+                                    Max character limit reached. Please shorten your text.
+                                </p>
+                            )}
+                        </div>
 
                         <div className="flex flex-wrap items-center justify-between gap-4">
                             <div className="flex items-center gap-3">
                                 <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
-                                    <span className="w-4 h-4 rounded-full bg-blue-500 overflow-hidden flex items-center justify-center text-[10px] text-white">US</span>
+                                    <Globe className="w-3.5 h-3.5 text-blue-500" />
                                     <span className="text-sm font-medium">English</span>
                                 </div>
-                                <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
-                                    <span className="w-4 h-4 rounded-full bg-pink-400"></span>
-                                    <span className="text-sm font-medium">Jessica</span>
+                                <div className="flex items-center gap-2">
+                                    <Select
+                                        value={selectedVoice?.voice_id}
+                                        onValueChange={(id) => {
+                                            const voice = voices.find((v) => v.voice_id === id);
+                                            setSelectedVoice(voice);
+                                            if (audioRef.current) audioRef.current.pause();
+                                            setPlayingVoiceId(null);
+                                        }}
+                                    >
+                                        <SelectTrigger className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 h-auto rounded-full border border-gray-100 hover:bg-gray-100 transition-colors">
+                                            <div className="w-4 h-4 rounded-full bg-pink-400"></div>
+                                            <span className="text-sm font-medium">{selectedVoice?.name || "Select Voice"}</span>
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {voices.map((voice) => (
+                                                <SelectItem key={voice.voice_id} value={voice.voice_id}>
+                                                    <div className="flex items-center justify-between w-full min-w-[200px]">
+                                                        <span>{voice.name}</span>
+                                                        <button
+                                                            className="ml-2 p-1 hover:bg-secondary rounded"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                playSample(voice);
+                                                            }}
+                                                        >
+                                                            {playingVoiceId === voice.voice_id ? (
+                                                                <div className="flex gap-0.5 items-center h-3">
+                                                                    <div className="w-0.5 bg-primary animate-wave h-full" />
+                                                                    <div className="w-0.5 bg-primary animate-wave h-2/3" />
+                                                                    <div className="w-0.5 bg-primary animate-wave h-3/4" />
+                                                                </div>
+                                                            ) : (
+                                                                <Volume2 className="h-3.5 w-3.5" />
+                                                            )}
+                                                        </button>
+                                                    </div>
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                             </div>
 
-                            <button className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition-colors">
+                            <button
+                                onClick={async () => {
+                                    if (!selectedVoice) {
+                                        toast.error("Please select a voice first");
+                                        return;
+                                    }
+                                    if (!ttsText.trim()) {
+                                        toast.error("Please enter some text");
+                                        return;
+                                    }
+                                    if (ttsText.length > MAX_CHARS) {
+                                        toast.error("Max limit of 100 characters exceeded");
+                                        return;
+                                    }
+
+                                    const t = toast.loading("Generating speech...");
+                                    try {
+                                        const response = await generateTTS(ttsText, selectedVoice.voice_id);
+                                        if (response?.success && response?.backendResponse?.audio_base64) {
+                                            const audioBase64 = response.backendResponse.audio_base64;
+                                            const audioSrc = `data:audio/wav;base64,${audioBase64}`;
+                                            const audio = new Audio(audioSrc);
+                                            audio.play().catch(e => console.error("Error playing generated audio", e));
+                                            toast.success("Speech generated and playing", { id: t });
+                                        } else {
+                                            toast.success("Speech generated successfully", { id: t });
+                                        }
+                                    } catch (error) {
+                                        toast.error("Failed to generate speech", { id: t });
+                                    }
+                                }}
+                                className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition-colors"
+                            >
                                 <Play className="w-5 h-5 fill-current ml-1" />
                             </button>
                         </div>

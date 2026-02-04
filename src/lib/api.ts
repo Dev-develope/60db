@@ -63,3 +63,60 @@ export const generateTTS = async (text: string, voiceId: string) => {
         throw error;
     }
 };
+
+export const getLanguages = async () => {
+    const url = "https://tts.qcall.ai/v1/languages";
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "accept": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching languages:", error);
+        throw error;
+    }
+};
+
+export const generateSTT = async (audioBlob: Blob, language: string) => {
+    const sttUrl = "https://api-dev.qcall.ai/tts/stt";
+    const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
+
+    const headers: HeadersInit = {
+        "accept": "application/json, text/plain, */*",
+        "origin": "https://qlabsui.netlify.app",
+        "referer": "https://qlabsui.netlify.app/",
+    };
+
+    if (token) {
+        headers["Authorization"] = `Bearer ${'sk_live_aae5a7508a51f6aacd21841791914435161007b8a8eaaf0b'}`;
+    }
+
+    const formData = new FormData();
+    formData.append("audio", audioBlob, "recording.wav");
+    formData.append("language", language);
+
+    try {
+        const response = await fetch(sttUrl, {
+            method: "POST",
+            headers: headers,
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error(`STT error: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error generating STT:", error);
+        throw error;
+    }
+};

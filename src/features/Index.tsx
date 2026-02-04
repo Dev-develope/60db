@@ -16,8 +16,9 @@ import { useState, useEffect, useRef } from "react";
 import { getVoices, generateTTS } from "@/lib/api";
 import { toast } from "sonner";
 
+const MAX_CHARS = 100;
+
 const Index = () => {
-  const MAX_CHARS = 100;
   const [voices, setVoices] = useState<any[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<any>(null);
   const [isLoadingVoices, setIsLoadingVoices] = useState(true);

@@ -7,7 +7,7 @@ import "swiper/css/mousewheel";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/autoplay";
-import { getVoices, generateTTS } from "@/lib/api";
+import { getVoices, generateTTS, generateSTT, getLanguages } from "@/lib/api";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -29,22 +29,40 @@ const TextToSpeechDemo = () => {
     const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
+    // Transcription states
+    const [isRecording, setIsRecording] = useState(false);
+    const [transcriptionText, setTranscriptionText] = useState("");
+    const [isTranscribing, setIsTranscribing] = useState(false);
+    const [languages, setLanguages] = useState<any[]>([]);
+    const [selectedLanguageSTT, setSelectedLanguageSTT] = useState<string>("en");
+    const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+    const audioChunksRef = useRef<Blob[]>([]);
+
     useEffect(() => {
         const fetchVoices = async () => {
             try {
-                const response = await getVoices();
-                if (response?.success) {
+                const [voicesRes, langsRes] = await Promise.all([
+                    getVoices(),
+                    getLanguages()
+                ]);
+
+                if (voicesRes?.success) {
                     const allVoices = [
-                        ...(response?.data?.cloned_voices || []),
-                        ...(response?.data?.built_in_voices || []),
+                        ...(voicesRes?.data?.cloned_voices || []),
+                        ...(voicesRes?.data?.built_in_voices || []),
                     ];
                     setVoices(allVoices);
                     if (allVoices.length > 0) {
                         setSelectedVoice(allVoices[0]);
                     }
                 }
+
+                if (langsRes) {
+                    // Assuming langsRes is an array or has a specific structure
+                    setLanguages(Array.isArray(langsRes) ? langsRes : (langsRes.data || []));
+                }
             } catch (error) {
-                console.error("Failed to fetch voices:", error);
+                console.error("Failed to fetch initial data:", error);
             } finally {
                 setIsLoadingVoices(false);
             }
@@ -162,6 +180,58 @@ const audio = await elevenlabs.textToSoundEffects.convert({
         audio.onended = () => {
             setPlayingVoiceId(null);
         };
+    };
+
+    const startRecording = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            mediaRecorderRef.current = mediaRecorder;
+            audioChunksRef.current = [];
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunksRef.current.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+                setIsTranscribing(true);
+                const t = toast.loading("Transcribing audio...");
+                try {
+                    const response = await generateSTT(audioBlob, selectedLanguageSTT);
+                    const transText = response?.data?.stt_response?.text || response?.data?.text || response?.backendResponse?.text;
+
+                    if (response?.success && transText) {
+                        setTranscriptionText(transText);
+                        toast.success("Transcription completed", { id: t });
+                    } else {
+                        toast.error("Failed to get transcription text", { id: t });
+                    }
+                } catch (error) {
+                    console.error("STT error:", error);
+                    toast.error("Error during transcription", { id: t });
+                } finally {
+                    setIsTranscribing(false);
+                }
+            };
+
+            mediaRecorder.start();
+            setIsRecording(true);
+            setTranscriptionText("");
+        } catch (error) {
+            console.error("Failed to access microphone:", error);
+            toast.error("Please allow microphone access");
+        }
+    };
+
+    const stopRecording = () => {
+        if (mediaRecorderRef.current && isRecording) {
+            mediaRecorderRef.current.stop();
+            mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+            setIsRecording(false);
+        }
     };
 
     const renderContent = () => {
@@ -299,12 +369,112 @@ const audio = await elevenlabs.textToSoundEffects.convert({
                 );
             case "Transcription":
                 return (
-                    <div className="bg-white rounded-2xl p-10 md:p-20 shadow-sm mb-10 flex flex-col items-center justify-center text-center">
-                        <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mb-6 shadow-lg cursor-pointer hover:scale-105 transition-transform">
-                            <Mic className="w-8 h-8 text-white" />
+                    <div className="bg-white rounded-2xl p-6 md:p-10 shadow-sm mb-10 min-h-[300px] flex flex-col items-center justify-center text-center relative overflow-hidden">
+                        {isTranscribing && (
+                            <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center">
+                                <div className="flex gap-1.5 mb-4">
+                                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce delay-0" />
+                                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce delay-150" />
+                                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce delay-300" />
+                                </div>
+                                <p className="text-sm font-medium text-foreground/70 text-animate">Transcribing...</p>
+                            </div>
+                        )}
+
+                        <div className="flex flex-col items-center gap-6 w-full max-w-md">
+                            {!transcriptionText && !isRecording && (
+                                <div className="w-full space-y-4">
+                                    {languages.length > 0 && (
+                                        <div className="flex flex-col items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-500">
+                                            <label className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">
+                                                Transcription Language
+                                            </label>
+                                            <Select
+                                                value={selectedLanguageSTT}
+                                                onValueChange={setSelectedLanguageSTT}
+                                            >
+                                                <SelectTrigger className="w-48 h-10 rounded-full bg-white border-gray-200 shadow-sm focus:ring-2 focus:ring-primary/20 transition-all">
+                                                    <div className="flex items-center gap-2">
+                                                        <Globe className="w-4 h-4 text-blue-500" />
+                                                        <SelectValue placeholder="Select Language" />
+                                                    </div>
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {languages.map((lang: any) => {
+                                                        const code = typeof lang === 'string' ? lang : (lang.code || lang.id);
+                                                        const name = typeof lang === 'string' ? lang : (lang.name || lang.label);
+                                                        return (
+                                                            <SelectItem key={code} value={code}>
+                                                                <span className="capitalize">{name}</span>
+                                                            </SelectItem>
+                                                        );
+                                                    })}
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    )}
+
+                                    <div className="flex flex-col items-center">
+                                        <div
+                                            onClick={startRecording}
+                                            className="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center shadow-xl cursor-pointer hover:scale-105 active:scale-95 transition-all group ring-offset-background hover:ring-2 hover:ring-primary hover:ring-offset-4"
+                                        >
+                                            <Mic className="w-10 h-10 text-white group-hover:scale-110 transition-transform" />
+                                        </div>
+                                        <div className="mt-6">
+                                            <h3 className="text-xl font-medium text-foreground mb-1">Start Transcribing</h3>
+                                            <p className="text-muted-foreground text-sm">Convert your speech to text in real-time</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        <h3 className="text-lg font-medium text-foreground mb-1">Click to start transcribing</h3>
-                        <p className="text-muted-foreground text-sm">Experience the power of Scribe v2 Realtime</p>
+
+                        {isRecording && (
+                            <div className="animate-in fade-in zoom-in duration-300 flex flex-col items-center">
+                                <div
+                                    onClick={stopRecording}
+                                    className="w-16 h-16 bg-destructive rounded-full flex items-center justify-center mb-6 shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all relative group"
+                                >
+                                    <div className="absolute inset-0 rounded-full bg-destructive/20 animate-ping" />
+                                    <div className="w-6 h-6 bg-white rounded-sm group-hover:scale-90 transition-transform" />
+                                </div>
+                                <h3 className="text-lg font-medium text-foreground mb-1">Recording...</h3>
+                                <p className="text-muted-foreground text-sm">Speak clearly into your microphone</p>
+
+                                <div className="mt-8 flex gap-1 items-center h-4">
+                                    {[...Array(12)].map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className="w-1 bg-destructive/40 rounded-full animate-wave"
+                                            style={{
+                                                height: `${Math.random() * 100}%`,
+                                                animationDelay: `${i * 0.1}s`
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {transcriptionText && !isRecording && !isTranscribing && (
+                            <div className="w-full h-full animate-in slide-in-from-bottom-4 duration-500">
+                                <div className="flex items-center justify-between mb-4 w-full px-2">
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60">Transcription</span>
+                                    <button
+                                        onClick={() => setTranscriptionText("")}
+                                        className="text-xs text-primary font-medium hover:underline"
+                                    >
+                                        Try Again
+                                    </button>
+                                </div>
+                                <div className="bg-gray-50/50 rounded-xl p-6 text-left border border-gray-100">
+                                    <p className="text-lg text-foreground/80 leading-relaxed font-light first-letter:capitalize">
+                                        {transcriptionText}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 );
             case "Music":

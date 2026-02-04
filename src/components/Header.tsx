@@ -359,12 +359,12 @@ const Header = () => {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link href="/login">
+          <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}>
             <Button variant="ghost" size="sm" className="text-muted hover:text-foreground">
               Log in
             </Button>
           </Link>
-          <Link href="/signup">
+          <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}>
             <Button size="sm">Get Started Free</Button>
           </Link>
         </div>
@@ -437,12 +437,12 @@ const Header = () => {
             </Link>
 
             <div className="flex flex-col gap-2 pt-4">
-              <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+              <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"} onClick={() => setIsMenuOpen(false)}>
                 <Button variant="ghost" className="w-full justify-center">
                   Log in
                 </Button>
               </Link>
-              <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
+              <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"} onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full">
                   Get Started Free
                 </Button>

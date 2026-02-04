@@ -150,14 +150,12 @@ const Signup = () => {
                     {passwordRequirements.map((req, index) => (
                       <div
                         key={index}
-                        className={`flex items-center gap-2 text-xs ${
-                          req.met ? "text-green-600" : "text-muted-foreground"
-                        }`}
+                        className={`flex items-center gap-2 text-xs ${req.met ? "text-green-600" : "text-muted-foreground"
+                          }`}
                       >
                         <Check
-                          className={`w-3 h-3 ${
-                            req.met ? "opacity-100" : "opacity-30"
-                          }`}
+                          className={`w-3 h-3 ${req.met ? "opacity-100" : "opacity-30"
+                            }`}
                         />
                         {req.label}
                       </div>
@@ -203,7 +201,7 @@ const Signup = () => {
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
               <Link
-                href="/login"
+                href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}
                 className="text-primary font-medium hover:underline"
               >
                 Sign in

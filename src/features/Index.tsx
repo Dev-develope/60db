@@ -126,7 +126,7 @@ const Index = () => {
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <Button variant="hero" size="xl" asChild>
-                  <Link href="/signup">
+                  <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}>
                     Get started free
                     <ArrowRight className="h-5 w-5" />
                   </Link>
@@ -390,7 +390,7 @@ const audio = await client.textToSpeech.convert({
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="xl" className="bg-primary-foreground text-foreground hover:bg-primary-foreground/90" asChild>
-                <Link href="/signup">
+                <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}>
                   Get started free
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </Link>

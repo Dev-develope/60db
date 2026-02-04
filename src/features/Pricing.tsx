@@ -230,11 +230,10 @@ const Pricing = () => {
                   <button
                     key={cat.key}
                     onClick={() => setCategory(cat.key)}
-                    className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${
-                      category === cat.key
-                        ? "bg-background text-foreground shadow-sm"
-                        : "text-muted hover:text-foreground"
-                    }`}
+                    className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${category === cat.key
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted hover:text-foreground"
+                      }`}
                   >
                     {cat.label}
                   </button>
@@ -267,9 +266,8 @@ const Pricing = () => {
               {creatorPlans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`relative bg-background rounded-2xl border p-6 flex flex-col ${
-                    plan.popular ? "border-primary shadow-card" : "border-border"
-                  }`}
+                  className={`relative bg-background rounded-2xl border p-6 flex flex-col ${plan.popular ? "border-primary shadow-card" : "border-border"
+                    }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -457,7 +455,7 @@ const Pricing = () => {
               </h2>
               <div className="flex gap-4">
                 <Button size="lg" className="bg-primary-foreground text-foreground hover:bg-primary-foreground/90" asChild>
-                  <Link href="/signup">
+                  <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}>
                     Get started
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Link>

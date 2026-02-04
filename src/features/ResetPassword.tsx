@@ -120,14 +120,12 @@ const ResetPassword = () => {
                       {passwordRequirements.map((req, index) => (
                         <div
                           key={index}
-                          className={`flex items-center gap-2 text-sm ${
-                            req.met ? "text-green-600" : "text-muted-foreground"
-                          }`}
+                          className={`flex items-center gap-2 text-sm ${req.met ? "text-green-600" : "text-muted-foreground"
+                            }`}
                         >
                           <Check
-                            className={`w-4 h-4 ${
-                              req.met ? "opacity-100" : "opacity-30"
-                            }`}
+                            className={`w-4 h-4 ${req.met ? "opacity-100" : "opacity-30"
+                              }`}
                           />
                           {req.label}
                         </div>
@@ -161,7 +159,7 @@ const ResetPassword = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href="/login">
+                <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}>
                   <Button className="w-full h-12 text-base" variant="hero">
                     Continue to Sign In
                   </Button>

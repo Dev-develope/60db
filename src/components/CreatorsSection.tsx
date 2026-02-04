@@ -81,7 +81,7 @@ const CreatorsSection = () => {
 
                 <div className="flex flex-col sm:flex-row items-start gap-4">
                     <Button variant="secondary" className="rounded-full px-6 bg-secondary/80 hover:bg-secondary text-secondary-foreground font-semibold" asChild>
-                        <Link href="/signup">
+                        <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}>
                             GET STARTED
                         </Link>
                     </Button>

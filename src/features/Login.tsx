@@ -151,7 +151,7 @@ const Login = () => {
             <p className="text-center text-sm text-muted-foreground">
               Don't have an account?{" "}
               <Link
-                href="/signup"
+                href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}
                 className="text-primary font-medium hover:underline"
               >
                 Sign up

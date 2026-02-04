@@ -62,14 +62,14 @@ const LeadQualificationSupportCTA = () => {
                         </h2>
 
                         <Link
-                            href="/signup"
+                            href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}
                             className="w-full bg-black text-white py-5 rounded-full text-sm font-bold tracking-tight hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg mb-6 uppercase"
                         >
                             Get Started Free
                         </Link>
 
                         <p className="text-sm font-bold text-foreground/40">
-                            Already have an account? <Link href="/login" className="text-foreground underline underline-offset-4 hover:text-black">Log In</Link>
+                            Already have an account? <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"} className="text-foreground underline underline-offset-4 hover:text-black">Log In</Link>
                         </p>
                     </motion.div>
                 </div>

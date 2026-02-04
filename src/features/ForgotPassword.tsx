@@ -72,7 +72,7 @@ const ForgotPassword = () => {
                 </form>
 
                 <Link
-                  href="/login"
+                  href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}
                   className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
@@ -118,7 +118,7 @@ const ForgotPassword = () => {
                 </p>
 
                 <Link
-                  href="/login"
+                  href={process.env.NEXT_PUBLIC_AUTH_URL || "https://qlabsui.netlify.app/"}
                   className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />

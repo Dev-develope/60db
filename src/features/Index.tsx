@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect, useRef } from "react";
-import { getVoices, generateTTS } from "@/lib/api";
+import { getVoices, generateTTS, getLanguages } from "@/lib/api";
 import { toast } from "sonner";
 
 const MAX_CHARS = 100;
@@ -22,6 +22,9 @@ const Index = () => {
   const [voices, setVoices] = useState<any[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<any>(null);
   const [isLoadingVoices, setIsLoadingVoices] = useState(true);
+  const [languages, setLanguages] = useState<any[]>([]);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [isLoadingLanguages, setIsLoadingLanguages] = useState(true);
   const [ttsText, setTtsText] = useState("Welcome to the future of voice AI. With 60db, you can create...");
   const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -80,7 +83,41 @@ const Index = () => {
       }
     };
 
+    const fetchLanguages = async () => {
+      try {
+        const response = await getLanguages();
+        console.log("Fetched languages:", response);
+        if (response?.data?.languages && Array.isArray(response.data.languages)) {
+          setLanguages(response.data.languages);
+
+          // Set default to English if available
+          const englishLang = response.data.languages.find((l: any) => l.code === "en");
+          if (englishLang) {
+            setSelectedLanguage("en");
+          } else if (response.data.languages.length > 0) {
+            setSelectedLanguage(response.data.languages[0].code);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch languages:", error);
+        // Fallback to default languages
+        const fallbackLanguages = [
+          { code: "en", name: "English" },
+          { code: "hi", name: "Hindi" },
+          { code: "bn", name: "Bengali" },
+          { code: "ta", name: "Tamil" },
+          { code: "te", name: "Telugu" },
+        ];
+        setLanguages(fallbackLanguages);
+        setSelectedLanguage("en");
+        toast.error("Failed to load languages. Using defaults.");
+      } finally {
+        setIsLoadingLanguages(false);
+      }
+    };
+
     fetchVoices();
+    fetchLanguages();
 
     return () => {
       if (audioRef.current) {
@@ -228,66 +265,89 @@ const Index = () => {
                   <div className="flex-1 h-px bg-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-3">
-                    <label className="text-sm font-medium text-foreground">Voice</label>
-                    <div className="flex items-center gap-2">
+                  <div className="space-y-6">
+                    <div className="space-y-3">
+                      <label className="text-sm font-medium text-foreground">Voice</label>
+                      <div className="flex items-center gap-2">
+                        <Select
+                          value={selectedVoice?.voice_id}
+                          onValueChange={(id) => {
+                            const voice = voices.find((v) => v.voice_id === id);
+                            setSelectedVoice(voice);
+                            if (playingVoiceId) {
+                              audioRef.current?.pause();
+                              setPlayingVoiceId(null);
+                            }
+                          }}
+                        >
+                          <SelectTrigger className="w-full h-auto p-3 bg-background border-border flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+                              <Users className="h-5 w-5 text-foreground" />
+                            </div>
+                            <div className="text-left flex-1">
+                              <div className="font-medium text-foreground">
+                                {selectedVoice?.name || "Select a voice"}
+                              </div>
+                              <div className="text-xs text-muted">
+                                {selectedVoice?.labels?.accent || selectedVoice?.category || "Neutral"}
+                              </div>
+                            </div>
+                          </SelectTrigger>
+                          <SelectContent>
+                            {voices.map((voice) => (
+                              <SelectItem key={voice.voice_id} value={voice.voice_id}>
+                                <div className="flex items-center justify-between w-full min-w-[200px]">
+                                  <div className="flex flex-col">
+                                    <span className="font-medium">{voice.name}</span>
+                                    <span className="text-xs text-muted">
+                                      {voice.labels?.accent || voice.category || "Neutral"}
+                                    </span>
+                                  </div>
+                                </div>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        {selectedVoice && (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-12 w-12 rounded-lg border border-border shrink-0"
+                            onClick={() => playSample(selectedVoice)}
+                          >
+                            {playingVoiceId === selectedVoice.voice_id ? (
+                              <div className="flex gap-1 items-end h-3">
+                                <div className="w-1 bg-primary animate-wave h-full" />
+                                <div className="w-1 bg-primary animate-wave h-2/3" />
+                                <div className="w-1 bg-primary animate-wave h-3/4" />
+                              </div>
+                            ) : (
+                              <Volume2 className="h-5 w-5" />
+                            )}
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <label className="text-sm font-medium text-foreground">Language</label>
                       <Select
-                        value={selectedVoice?.voice_id}
-                        onValueChange={(id) => {
-                          const voice = voices.find((v) => v.voice_id === id);
-                          setSelectedVoice(voice);
-                          if (playingVoiceId) {
-                            audioRef.current?.pause();
-                            setPlayingVoiceId(null);
-                          }
-                        }}
+                        value={selectedLanguage}
+                        onValueChange={setSelectedLanguage}
+                        disabled={isLoadingLanguages}
                       >
                         <SelectTrigger className="w-full h-auto p-3 bg-background border-border flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
-                            <Users className="h-5 w-5 text-foreground" />
-                          </div>
-                          <div className="text-left flex-1">
-                            <div className="font-medium text-foreground">
-                              {selectedVoice?.name || "Select a voice"}
-                            </div>
-                            <div className="text-xs text-muted">
-                              {selectedVoice?.labels?.accent || selectedVoice?.category || "Neutral"}
-                            </div>
-                          </div>
+                          <Globe className="h-5 w-5 text-muted-foreground" />
+                          <SelectValue placeholder="Select Language" />
                         </SelectTrigger>
                         <SelectContent>
-                          {voices.map((voice) => (
-                            <SelectItem key={voice.voice_id} value={voice.voice_id}>
-                              <div className="flex items-center justify-between w-full min-w-[200px]">
-                                <div className="flex flex-col">
-                                  <span className="font-medium">{voice.name}</span>
-                                  <span className="text-xs text-muted">
-                                    {voice.labels?.accent || voice.category || "Neutral"}
-                                  </span>
-                                </div>
-                              </div>
+                          {languages.map((lang) => (
+                            <SelectItem key={lang.code} value={lang.code}>
+                              {lang.name}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {selectedVoice && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-12 w-12 rounded-lg border border-border shrink-0"
-                          onClick={() => playSample(selectedVoice)}
-                        >
-                          {playingVoiceId === selectedVoice.voice_id ? (
-                            <div className="flex gap-1 items-end h-3">
-                              <div className="w-1 bg-primary animate-wave h-full" />
-                              <div className="w-1 bg-primary animate-wave h-2/3" />
-                              <div className="w-1 bg-primary animate-wave h-3/4" />
-                            </div>
-                          ) : (
-                            <Volume2 className="h-5 w-5" />
-                          )}
-                        </Button>
-                      )}
                     </div>
                   </div>
                   <div className="space-y-3">
@@ -307,7 +367,7 @@ const Index = () => {
                     </div>
 
                     <Textarea
-                      className="min-h-[64px] bg-background border-border text-sm resize-none"
+                      className="min-h-[120px] bg-background border-border text-sm resize-none"
                       value={ttsText}
                       onChange={(e) => {
                         const text = e.target.value
@@ -351,7 +411,7 @@ const Index = () => {
 
                       const t = toast.loading("Generating speech...");
                       try {
-                        const response = await generateTTS(ttsText, selectedVoice.voice_id);
+                        const response = await generateTTS(ttsText, selectedVoice.voice_id, selectedLanguage);
                         if (response?.success && response?.backendResponse?.audio_base64) {
                           const audioBase64 = response.backendResponse.audio_base64;
                           const audioSrc = `data:audio/wav;base64,${audioBase64}`;

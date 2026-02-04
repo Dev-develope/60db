@@ -30,7 +30,7 @@ export const getVoices = async () => {
     }
 };
 
-export const generateTTS = async (text: string, voiceId: string) => {
+export const generateTTS = async (text: string, voiceId: string, language?: string) => {
     const ttsUrl = "https://api-dev.qcall.ai/tts/tts-synthesize";
     const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
 
@@ -46,10 +46,15 @@ export const generateTTS = async (text: string, voiceId: string) => {
     }
 
     try {
+        const body: any = { text, voice_id: voiceId };
+        if (language) {
+            body.language = language;
+        }
+
         const response = await fetch(ttsUrl, {
             method: "POST",
             headers: headers,
-            body: JSON.stringify({ text, voice_id: voiceId }),
+            body: JSON.stringify(body),
         });
 
         if (!response.ok) {
@@ -65,13 +70,14 @@ export const generateTTS = async (text: string, voiceId: string) => {
 };
 
 export const getLanguages = async () => {
-    const url = "https://tts.qcall.ai/v1/languages";
+    const url = "https://api-dev.qcall.ai/tts/stt/languages";
     try {
         const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "accept": "application/json",
-            },
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${"sk_live_aae5a7508a51f6aacd21841791914435161007b8a8eaaf0b"}`,
+          },
         });
 
         if (!response.ok) {

@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, Mic, Volume2, Globe, Zap, Users, Code, CheckCircle } from "lucide-react";
+import { ArrowRight, Play, Mic, Volume2, Globe, Zap, Users, Code, CheckCircle, Key, Save } from "lucide-react";
 import Link from "next/link";
 import CreatorsSection from "@/components/CreatorsSection";
 import {
@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { useState, useEffect, useRef } from "react";
 import { getVoices, generateTTS, getLanguages } from "@/lib/api";
 import { toast } from "sonner";
@@ -27,6 +28,7 @@ const Index = () => {
   const [isLoadingLanguages, setIsLoadingLanguages] = useState(true);
   const [ttsText, setTtsText] = useState("Welcome to the future of voice AI. With 60db, you can create...");
   const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
+  const [userApiKey, setUserApiKey] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const playSample = (voice: any) => {
@@ -58,6 +60,17 @@ const Index = () => {
     audio.onended = () => {
       setPlayingVoiceId(null);
     };
+  };
+
+  const handleSaveApiKey = () => {
+    if (!userApiKey.trim()) {
+      toast.error("Please enter an API key");
+      return;
+    }
+    localStorage.setItem("apiKey", userApiKey.trim());
+    toast.success("API key saved successfully. You can now use all platform features.");
+    // Optionally refresh voices and languages with the new key
+    window.location.reload();
   };
 
 
@@ -116,8 +129,16 @@ const Index = () => {
       }
     };
 
+    const loadApiKey = () => {
+      const savedKey = localStorage.getItem("apiKey");
+      if (savedKey) {
+        setUserApiKey(savedKey);
+      }
+    };
+
     fetchVoices();
     fetchLanguages();
+    loadApiKey();
 
     return () => {
       if (audioRef.current) {
@@ -264,6 +285,33 @@ const Index = () => {
                   <span className="text-sm text-muted">Try it yourself</span>
                   <div className="flex-1 h-px bg-border" />
                 </div>
+
+                {/* API Key Section */}
+                <div className="mb-8 p-4 rounded-xl border border-dashed border-border bg-black/5">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Key className="h-4 w-4 text-muted" />
+                      <label className="text-sm font-medium text-foreground">API Key</label>
+                    </div>
+                    <div className="flex gap-2">
+                      <Input
+                        type="password"
+                        placeholder="Enter your sk_live_... API key"
+                        value={userApiKey}
+                        onChange={(e) => setUserApiKey(e.target.value)}
+                        className="bg-background border-border"
+                      />
+                      <Button onClick={handleSaveApiKey} className="shrink-0 flex gap-2">
+                        <Save className="h-4 w-4" />
+                        Save Key
+                      </Button>
+                    </div>
+                    <p className="text-[10px] text-muted">
+                      Your key is stored locally in your browser.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-6">
                     <div className="space-y-3">

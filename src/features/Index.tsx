@@ -17,6 +17,7 @@ import { getVoices, generateTTS } from "@/lib/api";
 import { toast } from "sonner";
 
 const Index = () => {
+  const MAX_CHARS = 100;
   const [voices, setVoices] = useState<any[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<any>(null);
   const [isLoadingVoices, setIsLoadingVoices] = useState(true);
@@ -289,13 +290,42 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <label className="text-sm font-medium text-foreground">Text</label>
+                    <div className="flex items-center justify-between">
+                      <label className="text-sm font-medium text-foreground">
+                        Text
+                      </label>
+
+                      <span
+                        className={`text-xs ${ttsText.length > MAX_CHARS
+                          ? 'text-destructive font-bold'
+                          : 'text-muted'
+                          }`}
+                      >
+                        {ttsText.length} / {MAX_CHARS} characters
+                      </span>
+                    </div>
+
                     <Textarea
                       className="min-h-[64px] bg-background border-border text-sm resize-none"
                       value={ttsText}
-                      onChange={(e) => setTtsText(e.target.value)}
+                      onChange={(e) => {
+                        const text = e.target.value
+
+                        if (text.length > MAX_CHARS) {
+                          toast.error('Max limit of 100 characters reached')
+                          return
+                        }
+
+                        setTtsText(text)
+                      }}
                       placeholder="Enter text to generate speech..."
                     />
+
+                    {ttsText.length > MAX_CHARS && (
+                      <p className="text-[10px] text-destructive mt-1 font-medium italic">
+                        Max character limit reached. Please shorten your text.
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="mt-4 flex items-center gap-4">
@@ -309,6 +339,12 @@ const Index = () => {
                       }
                       if (!ttsText.trim()) {
                         toast.error("Please enter some text");
+                        return;
+                      }
+
+                      const wordCount = ttsText.trim().split(/\s+/).length;
+                      if (wordCount > 100) {
+                        toast.error("Max limit of 100 words exceeded");
                         return;
                       }
 

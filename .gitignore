@@ -36,7 +36,8 @@ node_modules/
 .next/
 node_modules/
 .env*
-
+# Add these lines
 .env.local
+.env*.local
 .claude
 .claude/*
